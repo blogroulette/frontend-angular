@@ -1,0 +1,23 @@
+{
+  "generator-ngx-rocket": {
+    "version": "4.1.0",
+    "props": {
+      "location": "path",
+      "appName": "blogroulette web ui",
+      "target": [
+        "web",
+        "cordova"
+      ],
+      "pwa": true,
+      "mobile": [
+        "ios",
+        "android"
+      ],
+      "ui": "bootstrap",
+      "auth": true,
+      "lazy": true,
+      "projectName": "blogroulette-web-ui",
+      "packageManager": "npm"
+    }
+  }
+}

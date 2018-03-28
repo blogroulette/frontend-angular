@@ -1,0 +1,24 @@
+.spacing-all {
+  padding: .25em .5em .25em .5em;
+}
+.spacing-top {
+  margin-top: 1em;
+}
+.comment {
+  margin-left: 2em;
+  margin-right: .5em;
+}
+.btn {
+  margin: .3em;
+}
+
+#add-message {
+  position: fixed;
+  top: 4em;
+  right: .5em;
+}
+#show-docs {
+  position: fixed;
+  bottom: .5em;
+  right: .5em;
+}

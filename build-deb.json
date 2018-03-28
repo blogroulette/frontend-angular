@@ -1,0 +1,18 @@
+{
+  "dest": "dest/installers/",
+  "icon": "resources/logo.png",
+  "name": "blogroulette",
+  "productName": "Blogroulette",
+  "genericName": "Blogroulette",
+  "description": "Blogroulette UI with Web based technologies.",
+  "productDescription": "Blogroulette UI with Web based technologies.",
+  "version": "1.0.0",
+  "revision": "1.0.0",
+  "license": "MIT",
+  "categories": [
+    "Utility"
+  ],
+  "lintianOverrides": [
+    "changelog-file-missing-in-native-package"
+  ]
+}
