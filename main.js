@@ -8,11 +8,11 @@ function createWindow () {
     width: 400,
     height: 800,
     backgroundColor: '#ffffff',
-    icon: `file://${__dirname}/dist/assets/logo.png`
+    icon: `file://${__dirname}/www/assets/logo.png`
   })
 
 
-  win.loadURL(`file://${__dirname}/dist/index.html`)
+  win.loadURL(`file://${__dirname}/www/index.html`)
 
   //// uncomment below to open the DevTools.
   // win.webContents.openDevTools()

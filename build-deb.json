@@ -1,6 +1,6 @@
 {
   "dest": "dest/installers/",
-  "icon": "resources/logo.png",
+  "icon": "resources/icon.png",
   "name": "blogroulette",
   "productName": "Blogroulette",
   "genericName": "Blogroulette",
