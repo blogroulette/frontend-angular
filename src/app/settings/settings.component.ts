@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.Settings_isLoading = true;
-    this.settingsService.getSettings()
+    this.settingsService.loadSettings()
       .pipe(finalize(() => { this.Settings_isLoading = false; }))
       .subscribe((settings: Settings) => { this.settings = settings; });
   }

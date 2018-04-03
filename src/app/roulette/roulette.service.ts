@@ -5,73 +5,137 @@ import { of } from 'rxjs/observable/of';
 import { map, catchError } from 'rxjs/operators';
 
 const routes = {
-  message: () => `/message`,
-  doc: () => `/message/0`,
-  new_message: () => `new_message`,
-  add_comment: () => `add_comment`,
-  upvote: () => `upvote`,
-  downvote: () => `downvote`,
+  get_message: () => {return ({
+    endpoint: "GetMessage",
+  });},
+  get_documentation: () => {return ({
+    endpoint: "GetMessage",
+    body: {
+      messageid: 0,
+    }
+  });},
+  add_message: (c: add_message_context) => {return ({
+    endpoint: "AddMessage",
+    body: {
+      title: c.title,
+      text: c.text,
+    },
+  });},
+  upvote_message: (c: vote_context) => {return ({
+    endpoint: "UpvoteMessage",
+    body: {
+      messageid: c.id,
+    },
+  });},
+  downvote_message: (c: vote_context) => {return ({
+    endpoint: "DownvoteMessage",
+    body: {
+      messageid: c.id,
+    },
+  });},
+  add_comment: (c: add_comment_context) => {return ({
+    endpoint: "AddComment",
+    body: {
+      messageid: c.messageid,
+      text: c.text,
+    },
+  });},
+  upvote_comment: (c: vote_context) => {return ({
+    endpoint: "UpvoteComment",
+    body: {
+      commentid: c.id,
+    },
+  });},
+  downvote_comment: (c: vote_context) => {return ({
+    endpoint: "DownvoteComment",
+    body: {
+      commentid: c.id,
+    },
+  });},
 };
 
-export interface RouletteContext {
-  // The quote's category: 'dev', 'explicit'...
-  mid: string;
+export interface add_message_context {
+  title: string,
+  text: string,
+}
+export interface vote_context {
+  id: string,
+}
+export interface add_comment_context {
+  messageid: string,
+  text: string,
 }
 
 @Injectable()
 export class RouletteService {
 
   constructor(private httpClient: HttpClient) { }
-/*
-  getMessages(): Observable<Message[]> {
+
+  getRandomMessage(): Observable<Message> {
+    return this.httpClient
+      .post<Message>(
+        routes.get_message().endpoint, {});
+  }
+  getDocumentation(): Observable<Message> {
     return this.httpClient
       .cache()
-      .get<Message[]>(routes.message());
+      .post<Message>(
+        routes.get_documentation().endpoint,
+        routes.get_documentation().body);
   }
-*/
-  getMessage(): Observable<Message> {
-    return of(MOCKMESSAGE);
+  addMessage(c: add_message_context): Observable<Status> {
+    return this.httpClient
+      .post<Status>(
+        routes.add_message(c).endpoint,
+        routes.add_message(c).body);
   }
-  getDoc(): Observable<Message> {
-    return of(MOCKMESSAGE);
+  upvoteMessage(c: vote_context): Observable<Status> {
+    return this.httpClient
+      .post<Status>(
+        routes.upvote_message(c).endpoint,
+        routes.upvote_message(c).body);
   }
-/*
+  downvoteMessage(c: vote_context): Observable<Status> {
+    return this.httpClient
+      .post<Status>(
+        routes.downvote_message(c).endpoint,
+        routes.downvote_message(c).body);
   }
-  addComment(){
-
+  addComment(c: add_comment_context): Observable<Status> {
+    return this.httpClient
+      .post<Status>(
+        routes.add_comment(c).endpoint,
+        routes.add_comment(c).body);
   }
-  upvote(){
-
+  upvoteComment(c: vote_context): Observable<Status> {
+    return this.httpClient
+      .post<Status>(
+        routes.upvote_comment(c).endpoint,
+        routes.upvote_comment(c).body);
   }
-  downvote(){
-
-  }*/
-
+  downvoteComment(c: vote_context): Observable<Status> {
+    return this.httpClient
+      .post<Status>(
+        routes.downvote_comment(c).endpoint,
+        routes.downvote_comment(c).body);
+  }
 }
 
-export const MOCKMESSAGE: Message = {
-  mid: "message-id",
-  title: "Documentation-title",
-  text: "Documentation text. This is written in markdown\n```test```",
-  votes: 17,
-  comments: [
-    {
-      cid: "comment-id",
-      text: "Comment Text",
-      votes: 123,
-    },
-  ],
+export interface Status {
+  status: string;
+  error?: string;
 }
-
 export interface Message {
-  mid: string;
+  messageid: string;
+  timestamp: string;
   title: string;
   text: string;
   votes: number;
   comments?: Comment[];
 }
 export interface Comment {
-  cid: string;
-  text: string;
-  votes: number;
+  commentid: string,
+  timestamp: string,
+  text: string,
+  votes: number,
 }

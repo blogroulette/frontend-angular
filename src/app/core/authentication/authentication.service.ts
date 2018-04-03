@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
+import { HttpClient } from '@angular/common/http';
+
 export interface Credentials {
-  // Customize received credentials here
   username: string;
   token: string;
 }
@@ -12,6 +13,24 @@ export interface LoginContext {
   username: string;
   password: string;
   remember?: boolean;
+}
+
+export interface Status {
+  status: string;
+  error?: string;
+}
+
+const routes = {
+  login: (c: LoginContext) => {return ({
+    endpoint: "Login",
+    body: {
+      username: c.username,
+      password: c.password,
+    },
+  });},
+  logout: () => {return ({
+    endpoint: "Logout",
+  });},
 }
 
 const credentialsKey = 'credentials';
@@ -25,7 +44,7 @@ export class AuthenticationService {
 
   private _credentials: Credentials | null;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -37,24 +56,28 @@ export class AuthenticationService {
    * @param {LoginContext} context The login parameters.
    * @return {Observable<Credentials>} The user credentials.
    */
-  login(context: LoginContext): Observable<Credentials> {
-    // Replace by proper authentication call
-    const data = {
-      username: context.username,
-      token: '123456'
-    };
-    this.setCredentials(data, context.remember);
-    return of(data);
+  login(c: LoginContext): Observable<Credentials> {
+    var obs = this.httpClient
+      .post<Credentials>(
+        routes.login(c).endpoint,
+        routes.login(c).body);
+    obs.subscribe((credentials: Credentials) => {
+        this.setCredentials(credentials, c.remember);
+        });
+    return obs;
   }
 
   /**
    * Logs out the user and clear credentials.
    * @return {Observable<boolean>} True if the user was logged out successfully.
    */
-  logout(): Observable<boolean> {
-    // Customize credentials invalidation here
+  logout(): Observable<Status> {
+    var obs = this.httpClient
+      .post<Status>(
+        routes.logout().endpoint, {});
     this.setCredentials();
-    return of(true);
+    const st = {status: "logoff"}
+    return of(st);
   }
 
   /**

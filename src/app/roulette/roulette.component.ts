@@ -25,13 +25,13 @@ export class RouletteComponent implements OnInit {
   }
   getMessage(){
     this.message_isLoading = true;
-    this.rouletteService.getMessage()
+    this.rouletteService.getRandomMessage()
       .pipe(finalize(() => { this.message_isLoading = false; }))
       .subscribe((message: Message) => { this.message = message; });
   }
   getDoc(){
     this.message_isLoading = true;
-    this.rouletteService.getDoc()
+    this.rouletteService.getDocumentation()
       .pipe(finalize(() => { this.message_isLoading = false; }))
       .subscribe((doc: Message) => { this.message = doc; });
   }

@@ -5,12 +5,23 @@ import { of } from 'rxjs/observable/of';
 import { map, catchError } from 'rxjs/operators';
 
 const routes = {
-  settings: () => `/settings`
+  load_settings: () => {return ({
+    endpoint: "/LoadSettings",
+  });},
+  save_settings: (c: save_settings_context) => {return ({
+    endpoint: "/SaveSettings",
+    body: {
+      username: c.username,
+      password: c.password,
+      newpassword: c.newpassword,
+    },
+  });},
 };
 
-export interface SettingsContext {
-  // The quote's category: 'dev', 'explicit'...
-  category: string;
+export interface save_settings_context {
+  username: string,
+  password: string,
+  newpassword: string,
 }
 
 @Injectable()
@@ -18,14 +29,24 @@ export class SettingsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getSettings(): Observable<Settings> {
+  loadSettings(): Observable<Settings> {
     return this.httpClient
-      .cache()
-      .get<Settings>(routes.settings());
+      .post<Settings>(
+        routes.load_settings().endpoint, {});
+  }
+  saveSettings(c: save_settings_context): Observable<Status> {
+    return this.httpClient
+      .post<Status>(
+        routes.save_settings(c).endpoint,
+        routes.save_settings(c).body);
   }
 
 }
 
+export interface Status {
+  status: string;
+  error?: string;
+}
 export interface Settings {
-  value: string;
+  username: string;
 }
