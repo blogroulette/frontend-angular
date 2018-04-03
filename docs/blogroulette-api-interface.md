@@ -4,6 +4,7 @@
 
 #### Login
 ```
+ENDPOINT: Login
 POST{
   username: string,
   password: string,
@@ -15,6 +16,7 @@ RESPONSE{
 
 #### Logout:Authenticated
 ```
+ENDPOINT: Logout
 POST{}
 RESPONSE{
   status: string,
@@ -24,6 +26,7 @@ RESPONSE{
 
 #### Register
 ```
+ENDPOINT: Register
 POST{
   invitetoken: string,
   username: string,
@@ -70,14 +73,14 @@ ENDPOINT: GetRandomMessage
 POST{}
 RESPONSE{
   messageid: string,
-  timestamp: RFC3339,
+  timestamp: RFC3339(2004-06-14T23:34:30Z),
   title: string,
   text: string,
   votes: number,
   comments: [
     {
       commentid: string,
-      timestamp: RFC3339,
+      timestamp: RFC3339(2004-06-14T23:34:30Z),
       text: string,
       votes: number,
     }
@@ -91,14 +94,14 @@ ENDPOINT: GetDocumentation
 POST{}
 RESPONSE{
   messageid: string,
-  timestamp: RFC3339,
+  timestamp: RFC3339(2004-06-14T23:34:30Z),
   title: string,
   text: string,
   votes: number,
   comments: [
     {
       commentid: string,
-      timestamp: RFC3339,
+      timestamp: RFC3339(2004-06-14T23:34:30Z),
       text: string,
       votes: number,
     }
