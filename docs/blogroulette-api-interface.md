@@ -67,31 +67,10 @@ RESPONSE{
 
 ## Roulette
 
-#### getRandomMessage
+#### getMessage
 ```
 ENDPOINT: GetRandomMessage
-POST{}
-RESPONSE{
-  messageid: string,
-  timestamp: RFC3339(2004-06-14T23:34:30Z),
-  title: string,
-  text: string,
-  votes: number,
-  comments: [
-    {
-      commentid: string,
-      timestamp: RFC3339(2004-06-14T23:34:30Z),
-      text: string,
-      votes: number,
-    }
-  ]
-}
-```
-
-#### getDocumentation
-```
-ENDPOINT: GetDocumentation
-POST{}
+POST{messageid?: string}
 RESPONSE{
   messageid: string,
   timestamp: RFC3339(2004-06-14T23:34:30Z),
