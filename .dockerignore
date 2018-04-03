@@ -1,0 +1,8 @@
+# Dockerignore
+# Send only static build files from www directory
+# and the nginx.conf to the Docker Daemon ignoring
+# everything else.
+**
+!www/
+!nginx.conf
+
