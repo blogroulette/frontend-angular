@@ -8,11 +8,14 @@
   margin-left: 1em;
   margin-right: .5em;
 }
-.btn {
+.buttn {
   margin: .3em;
 }
+.w-6{
+  width: 6em;
+}
 .image-icon {
-  height: 1.4rem;
+  height: calc(1.4rem * 2);
   transform: rotate(360deg);
 }
 
@@ -25,4 +28,8 @@
   position: fixed;
   bottom: .5em;
   right: .5em;
+}
+.marg-0 {
+  margin: 0;
+  padding: 0;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
-import { RouletteService, Message } from './roulette.service';
+import { RouletteService, Message, Comment } from './roulette.service';
 
 @Component({
   selector: 'app-roulette',
@@ -10,16 +10,35 @@ import { RouletteService, Message } from './roulette.service';
 })
 export class RouletteComponent implements OnInit {
 
-  messages: Message[];
-  messages_isLoading: boolean;
+  message: Message;
+  message_isLoading: boolean;
+  write_new_message: boolean;
+  write_new_comment: boolean;
 
-  constructor(private rouletteService: RouletteService) { }
+  constructor(private rouletteService: RouletteService) {
+    this.write_new_message=false;
+    this.write_new_comment=false;
+  }
 
   ngOnInit() {
-    this.messages_isLoading = true;
-    this.rouletteService.getMessages()
-      .pipe(finalize(() => { this.messages_isLoading = false; }))
-      .subscribe((messages: Message[]) => { this.messages = messages; });
+    this.getMessage();
   }
+  getMessage(){
+    this.message_isLoading = true;
+    this.rouletteService.getMessage()
+      .pipe(finalize(() => { this.message_isLoading = false; }))
+      .subscribe((message: Message) => { this.message = message; });
+  }
+  getDoc(){
+    this.message_isLoading = true;
+    this.rouletteService.getDoc()
+      .pipe(finalize(() => { this.message_isLoading = false; }))
+      .subscribe((doc: Message) => { this.message = doc; });
+  }
+  addComment(mid: number){
+    alert("Add Comment for: " + mid);
+    this.write_new_comment = false;
+  }
+
 
 }

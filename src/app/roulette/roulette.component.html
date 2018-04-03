@@ -1,23 +1,34 @@
 <div class="container">
   <div class="text-center">
-    <button id="other-message" type="button" class="btn btn-primary"><img class="image-icon fa-spin fa-3x rounded-circle" src="assets/logo.png" alt="load other message"></button>
+    <button id="other-message" type="button" class="btn btn-outline-primary"><img class="image-icon fa-spin fa-3x rounded-circle" src="assets/logo.png" alt="load other message"></button>
   </div>
-  <div class="card spacing-all spacing-top">
-    <h2>Title</h2>
-    <textarea class="form-control" aria-label="With textarea" rows="8">For Output of Text Message</textarea>
+  <app-loader [isLoading]="message_isLoading"></app-loader>
+  <div *ngIf="!message_isLoading || !write_new_message" class="card spacing-all spacing-top">
+    <h2>{{this.message.title}}</h2>
+    <textarea class="form-control" aria-label="message text area" rows="8">{{message.text}}</textarea>
     <div class="spacing-top d-flex justify-content-between">
-      <span class="btn">12</span>
-      <button type="button" class="btn btn-primary">Add Comment</button>
+      <span class="btn">{{message.votes}}</span>
+      <button type="button" class="btn btn-primary" (click)="write_new_comment = !write_new_comment;" >Add Comment</button>
     </div>
   </div>
-  <div class="spacing-top spacing-top d-flex justify-content-between">
-      <div class="d-flex flex-column comment">
-        <span class="btn">1234</span>
-        <button type="button" class="btn btn-primary"><i class="far fa-thumbs-up"></i></button>
-        <button type="button" class="btn btn-primary"><i class="far fa-thumbs-down"></i></button>
+  <div *ngIf="write_new_comment" class="spacing-top spacing-top d-flex justify-content-between">
+    <div class="d-flex flex-column comment w-6">
+    </div>
+    <div class="d-flex flex-column container-fluid marg-0">
+      <textarea class="form-control" aria-label="new comment text area" rows="6"></textarea>
+      <div class="clearfix spacing-top container-fluid">
+          <button type="button" name="button" class="btn btn-success float-right" (click)="addComment(this.message.mid);">Submit</button>
       </div>
-        <textarea class="form-control" aria-label="With textarea" rows="6">For Output of Text Message</textarea>
+    </div>
+    </div>
+  <div *ngFor="let comment of message.comments" class="spacing-top spacing-top d-flex justify-content-between">
+      <div class="d-flex flex-column comment w-6">
+        <span class="btn">{{comment.votes}}</span>
+        <button type="button" class="btn buttn btn-primary" (click)="comment.votes = comment.votes + 1;"><i class="far fa-thumbs-up"></i></button>
+        <button type="button" class="btn buttn btn-primary" (click)="comment.votes = comment.votes - 1;"><i class="far fa-thumbs-down"></i></button>
+      </div>
+        <textarea class="form-control" aria-label="comment text area" rows="6">{{comment.text}}</textarea>
     </div>
 </div>
-<button id="add-message" type="button" class="btn btn-primary"><i class="fas fa-plus"></i></button>
-<button id="show-docs" type="button" class="btn btn-primary"><i class="fas fa-book"></i></button>
+<button id="add-message" type="button" class="btn buttn btn-outline-primary"><i class="fas fa-plus"></i></button>
+<button id="show-docs" type="button" class="btn buttn btn-outline-primary"><i class="fas fa-book"></i></button>
