@@ -6,48 +6,48 @@ import { map, catchError } from 'rxjs/operators';
 
 const routes = {
   get_message: () => {return ({
-    endpoint: "GetMessage",
+    endpoint: "/GetMessage",
   });},
   get_documentation: () => {return ({
-    endpoint: "GetMessage",
+    endpoint: "/GetMessage",
     body: {
       messageid: 0,
     }
   });},
   add_message: (c: add_message_context) => {return ({
-    endpoint: "AddMessage",
+    endpoint: "/AddMessage",
     body: {
       title: c.title,
       text: c.text,
     },
   });},
   upvote_message: (c: vote_context) => {return ({
-    endpoint: "UpvoteMessage",
+    endpoint: "/UpvoteMessage",
     body: {
       messageid: c.id,
     },
   });},
   downvote_message: (c: vote_context) => {return ({
-    endpoint: "DownvoteMessage",
+    endpoint: "/DownvoteMessage",
     body: {
       messageid: c.id,
     },
   });},
   add_comment: (c: add_comment_context) => {return ({
-    endpoint: "AddComment",
+    endpoint: "/AddComment",
     body: {
       messageid: c.messageid,
       text: c.text,
     },
   });},
   upvote_comment: (c: vote_context) => {return ({
-    endpoint: "UpvoteComment",
+    endpoint: "/UpvoteComment",
     body: {
       commentid: c.id,
     },
   });},
   downvote_comment: (c: vote_context) => {return ({
-    endpoint: "DownvoteComment",
+    endpoint: "/DownvoteComment",
     body: {
       commentid: c.id,
     },

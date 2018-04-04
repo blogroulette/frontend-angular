@@ -27,14 +27,14 @@ export interface Status {
 
 const routes = {
   login: (c: LoginContext) => {return ({
-    endpoint: "Login",
+    endpoint: "/Login",
     body: {
       username: c.username,
       password: c.password,
     },
   });},
   register: (c: RegisterContext) => {return ({
-    endpoint: "Register",
+    endpoint: "/Register",
     body: {
       invitetoken: c.invitetoken,
       username: c.username,
@@ -42,7 +42,7 @@ const routes = {
     },
   });},
   logout: () => {return ({
-    endpoint: "Logout",
+    endpoint: "/Logout",
   });},
 }
 
@@ -70,10 +70,12 @@ export class AuthenticationService {
    * @return {Observable<Credentials>} The user credentials.
    */
   login(c: LoginContext): Observable<Credentials> {
-    var obs = this.httpClient
+    var obss = {username: "user", token: "testtoken1234"};/*= this.httpClient
       .post<Credentials>(
         routes.login(c).endpoint,
         routes.login(c).body);
+      */
+    var obs = of(obss);
     obs.subscribe((credentials: Credentials) => {
         this.setCredentials(credentials, c.remember);
         });
