@@ -87,37 +87,43 @@ export class RouletteService {
     return this.httpClient
       .post<Status>(
         routes.add_message(c).endpoint,
-        routes.add_message(c).body);
+        routes.add_message(c).body)
+        .authenticate();
   }
   upvoteMessage(c: vote_context): Observable<Status> {
     return this.httpClient
       .post<Status>(
         routes.upvote_message(c).endpoint,
-        routes.upvote_message(c).body);
+        routes.upvote_message(c).body)
+        .authenticate();
   }
   downvoteMessage(c: vote_context): Observable<Status> {
     return this.httpClient
       .post<Status>(
         routes.downvote_message(c).endpoint,
-        routes.downvote_message(c).body);
+        routes.downvote_message(c).body)
+        .authenticate();
   }
   addComment(c: add_comment_context): Observable<Status> {
     return this.httpClient
       .post<Status>(
         routes.add_comment(c).endpoint,
-        routes.add_comment(c).body);
+        routes.add_comment(c).body)
+        .authenticate();
   }
   upvoteComment(c: vote_context): Observable<Status> {
     return this.httpClient
       .post<Status>(
         routes.upvote_comment(c).endpoint,
-        routes.upvote_comment(c).body);
+        routes.upvote_comment(c).body)
+        .authenticate();
   }
   downvoteComment(c: vote_context): Observable<Status> {
     return this.httpClient
       .post<Status>(
         routes.downvote_comment(c).endpoint,
-        routes.downvote_comment(c).body);
+        routes.downvote_comment(c).body)
+        .authenticate();
   }
 }
 
