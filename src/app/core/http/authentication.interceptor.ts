@@ -11,11 +11,14 @@ import { AuthenticationService } from '../authentication/authentication.service'
  */
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
-  constructor(private auth: AuthenticationService){}
-
+  constructor(private authenticationService: AuthenticationService){}
+  get token(): string | null {
+    const credentials = this.authenticationService.credentials;
+    return credentials ? credentials.token : null;
+  }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = request.clone({
-      headers: request.headers.set('Authorization', 'Token')
+      headers: request.headers.set('Authorization', this.token )
     });
     return next.handle(request);
   }
