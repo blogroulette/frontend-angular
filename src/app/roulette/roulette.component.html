@@ -16,16 +16,29 @@
         <button type="button" class="btn btn-primary" (click)="write_new_comment = !write_new_comment;" translate>Add Comment</button>
       </div>
     </div>
-    <div *ngIf="write_new_comment" class="spacing-top spacing-top d-flex justify-content-between">
-      <div class="d-flex flex-column comment w-6">
-      </div>
-      <div class="d-flex flex-column container-fluid marg-0">
-        <textarea class="form-control" aria-label="new comment text area" rows="6"></textarea>
-        <div class="clearfix spacing-top container-fluid">
-            <button type="button" name="button" class="btn btn-success float-right" (click)="addComment(this.message.mid);" translate>Submit</button>
-        </div>
-      </div>
-      </div>
+
+    <div *ngIf="write_new_comment">
+      <form (ngSubmit)="addComment()" [formGroup]="newcommentForm" novalidate>
+        <div class="spacing-top spacing-top d-flex justify-content-between">
+          <div class="d-flex flex-column comment w-6">
+          </div>
+          <div class="form-group">
+            <label class="d-block">
+            <textarea class="form-control" formControlName="text" autocomplete="" aria-label="new comment text area" rows="6"></textarea>
+            <small [hidden]="newcommentForm.controls.text.valid || loginForm.controls.username.untouched"
+                   class="text-danger" translate>
+              You need to add some text to add a comment.
+            </small>
+            </label>
+            <div class="clearfix spacing-top container-fluid">
+                <button type="submit" name="button" class="btn btn-success float-right" translate>Submit</button>
+            </div>
+            </div>
+          </div>
+        </form>
+    </div>
+
+
     <div *ngFor="let comment of message.comments" class="spacing-top spacing-top d-flex justify-content-between">
         <div class="d-flex flex-column comment w-6">
           <span class="btn">{{comment.votes}}</span>
@@ -34,16 +47,36 @@
         </div>
           <textarea class="form-control" aria-label="comment text area" rows="6">{{comment.text}}</textarea>
       </div>
-      <div *ngIf="write_new_message">
-        <div *ngIf="write_new_comment" class="spacing-top spacing-top d-flex justify-content-between">
-          <div class="d-flex flex-column container-fluid marg-0">
-            <textarea class="form-control" aria-label="new message text area" rows="9"></textarea>
-            <div class="clearfix spacing-top container-fluid">
-                <button type="button" name="button" class="btn btn-success float-right" (click)="addMessage();" translate>Submit</button>
-            </div>
+
+  </div>
+
+  <div *ngIf="write_new_message">
+    <form (ngSubmit)="addMessage()" [formGroup]="newmessageForm" novalidate>
+      <div class="spacing-top spacing-top d-flex justify-content-between">
+        <div class="d-flex flex-column container-fluid marg-0">
+          <div class="form-group">
+            <label class="d-block">
+          <input type="text" class="form-control" formControlName="title" autocomplete="title"
+                 [placeholder]="'Title' | translate"/>
+          <small [hidden]="newmessageForm.controls.title.valid || newmessageForm.controls.title.untouched"
+                class="text-danger" translate>
+          You need to add a title to add a message.
+          </small>
+          </label>
+          <label class="d-block">
+          <textarea class="form-control" formControlName="text" autocomplete="" aria-label="new message text area" rows="9"></textarea>
+          <small [hidden]="newmessageForm.controls.text.valid || newmessageForm.controls.text.untouched"
+                 class="text-danger" translate>
+            You need to add some text to add a message.
+          </small>
+          </label>
+          <div class="clearfix spacing-top container-fluid">
+              <button type="submit" name="button" class="btn btn-success float-right" translate>Submit</button>
           </div>
-          </div>
+        </div>
+        </div>
       </div>
+    </form>
   </div>
 
 </div>

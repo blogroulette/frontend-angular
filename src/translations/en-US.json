@@ -23,5 +23,6 @@
   "The Token is required": "The Token is required",
   "User could not be registered": "User could not be registered",
   "a Password is required": "a Password is required",
-  "Passwords do not match": "Passwords do not match"
+  "Passwords do not match": "Passwords do not match",
+  "Title": "Title"
 }

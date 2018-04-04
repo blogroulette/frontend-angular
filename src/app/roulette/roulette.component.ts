@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 import { RouletteService, Message, Comment } from './roulette.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-roulette',
@@ -14,10 +15,13 @@ export class RouletteComponent implements OnInit {
   message_isLoading: boolean;
   write_new_message: boolean;
   write_new_comment: boolean;
+  error: string;
+  newmessageForm: FormGroup;
+  newcommentForm: FormGroup;
 
-  constructor(private rouletteService: RouletteService) {
-    this.write_new_message=false;
-    this.write_new_comment=false;
+  constructor(private rouletteService: RouletteService,
+              private formBuilder: FormBuilder) {
+                this.createForm();
   }
 
   ngOnInit() {
@@ -36,7 +40,11 @@ export class RouletteComponent implements OnInit {
       .subscribe((doc: Message) => { this.message = doc; });
   }
   addComment(mid: number){
-    alert("Add Comment for: " + mid);
+    alert(this.message.messageid + "" + this.newcommentForm.value.text);
+    this.write_new_comment = false;
+  }
+  addMessage(){
+    alert(this.newmessageForm.value.title + "" + this.newmessageForm.value.text);
     this.write_new_comment = false;
   }
   upvoteComment(comment: Comment){
@@ -52,5 +60,14 @@ export class RouletteComponent implements OnInit {
     this.message.votes = this.message.votes - 1;
   }
 
+  private createForm() {
+    this.newmessageForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      text: ['', Validators.required]
+    });
+    this.newcommentForm = this.formBuilder.group({
+      text: ['', Validators.required]
+    });
+    }
 
 }

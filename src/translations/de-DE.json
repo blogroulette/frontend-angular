@@ -23,5 +23,6 @@
   "The Token is required": "Der Code wird benötigt",
   "User could not be registered": "Nutzer konnte nicht angelegt werden",
   "a Password is required": "Es wird ein Passwort benötigt",
-  "Passwords do not match": "Die Passwörter stimmen nicht überein"
+  "Passwords do not match": "Die Passwörter stimmen nicht überein",
+  "Title": "Überschrift"
 }
