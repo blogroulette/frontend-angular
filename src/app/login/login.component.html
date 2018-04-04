@@ -80,7 +80,7 @@
                   <input type="password" class="form-control" formControlName="rpassword" autocomplete="repeat-new-password"
                          [placeholder]="'Repeat New Password' | translate" required/>
                   <span hidden translate>Repeat New Password</span>
-                  <small [hidden]="registerForm.controls.password == registerForm.controls.rpassword"
+                  <small [hidden]="registerForm.controls.password == registerForm.controls.rpassword || registerForm.controls.password.untouched || registerForm.controls.rpassword.untouched"
                          class="text-danger" translate>
                     Passwords do not match
                   </small>
