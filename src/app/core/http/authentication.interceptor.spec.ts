@@ -3,9 +3,9 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
 import { environment } from '@env/environment';
-import { ApiPrefixInterceptor } from './api-prefix.interceptor';
+import { AuthenticationInterceptor } from './authentication.interceptor';
 
-describe('ApiPrefixInterceptor', () => {
+describe('AuthenticationInterceptor', () => {
   let http: HttpClient;
   let httpMock: HttpTestingController;
 
@@ -14,7 +14,7 @@ describe('ApiPrefixInterceptor', () => {
       imports: [HttpClientTestingModule],
       providers: [{
         provide: HTTP_INTERCEPTORS,
-        useClass: ApiPrefixInterceptor,
+        useClass: AuthenticationInterceptor,
         multi: true
       }]
     });
@@ -34,11 +34,12 @@ describe('ApiPrefixInterceptor', () => {
     httpMock.verify();
   });
 
-  it('should prepend environment.serverUrl to the request url', () => {
+  it('should add authentication header field to the request url', () => {
     // Act
-    http.get('/toto').subscribe();
+    http.get('/toto').authenticate().subscribe();
 
     // Assert
-    httpMock.expectOne({ url: environment.serverUrl + '/toto' });
+    // test for authenticatio header field
+    httpMock.expectOne({ url: environment.serverUrl + '/toto'});
   });
 });

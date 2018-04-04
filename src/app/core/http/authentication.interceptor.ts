@@ -10,7 +10,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
  * sets headers`.
  */
 @Injectable()
-export class ApiHeaderInterceptor implements HttpInterceptor {
+export class AuthenticationInterceptor implements HttpInterceptor {
   constructor(private auth: AuthenticationService){}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

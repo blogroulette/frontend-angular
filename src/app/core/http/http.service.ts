@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { ErrorHandlerInterceptor } from './error-handler.interceptor';
 import { CacheInterceptor } from './cache.interceptor';
+import { AuthenticationInterceptor } from './authentication.interceptor';
 
 // HttpClient is declared in a re-exported module, so we have to extend the original module to make it work properly
 // (see https://github.com/Microsoft/TypeScript/issues/13897)
@@ -19,6 +20,11 @@ declare module '@angular/common/http/src/client' {
      * @return {HttpClient} The new instance.
      */
     cache(forceUpdate?: boolean): HttpClient;
+    /**
+     * Enables authentication for this request.
+     * @return {HttpClient} The new instance.
+     */
+    authenticate(): HttpClient;
 
     /**
      * Skips default error handler for this request.
@@ -71,6 +77,10 @@ export class HttpService extends HttpClient {
   cache(forceUpdate?: boolean): HttpClient {
     const cacheInterceptor = this.injector.get(CacheInterceptor).configure({ update: forceUpdate });
     return this.addInterceptor(cacheInterceptor);
+  }
+  authenticate(): HttpClient {
+    const authenticationInterceptor = this.injector.get(AuthenticationInterceptor);
+    return this.addInterceptor(authenticationInterceptor);
   }
 
   skipErrorHandler(): HttpClient {
