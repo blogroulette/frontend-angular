@@ -22,14 +22,16 @@ const routes = {
     },
   });},
   upvote_message: (c: vote_context) => {return ({
-    endpoint: "/UpvoteMessage",
+    endpoint: "/VoteMessage",
     body: {
+      vote: "up",
       messageid: c.id,
     },
   });},
   downvote_message: (c: vote_context) => {return ({
-    endpoint: "/DownvoteMessage",
+    endpoint: "/VoteMessage",
     body: {
+      vote: "down",
       messageid: c.id,
     },
   });},
@@ -41,14 +43,16 @@ const routes = {
     },
   });},
   upvote_comment: (c: vote_context) => {return ({
-    endpoint: "/UpvoteComment",
+    endpoint: "/VoteComment",
     body: {
+      vote: "up",
       commentid: c.id,
     },
   });},
   downvote_comment: (c: vote_context) => {return ({
-    endpoint: "/DownvoteComment",
+    endpoint: "/VoteComment",
     body: {
+      vote: "down",
       commentid: c.id,
     },
   });},

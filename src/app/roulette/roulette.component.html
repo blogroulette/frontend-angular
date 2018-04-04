@@ -27,10 +27,10 @@
       </div>
     </div>
 
-      <div *ngIf="write_new_comment" class="spacing-m-top d-flex justify-content-between">
+      <!--<div *ngIf="write_new_comment" class="spacing-m-top d-flex justify-content-between">
             <div class="d-flex flex-column comment w-6">
             </div>
-            <form class="container-fluid marg-0 padd-0" (ngSubmit)="addComment()" [formGroup]="newcommentForm" novalidate>
+            <form (ngSubmit)="addComment()" [formControl]="newcommentForm" class="container-fluid marg-0 padd-0" novalidate>
               <div class="form-group">
                 <label class="d-block">
                 <textarea class="form-control" formControlName="text" autocomplete="" aria-label="new comment text area" rows="6"></textarea>
@@ -40,12 +40,29 @@
                 </div>
                 </label>
                 <div class="clearfix">
-                    <button type="submit" name="button" class="btn btn-success float-right" translate>Submit</button>
+                    <button type="submit" name="button" class="btn btn-success float-right" [disabled]="newcommentForm.invalid || isLoading" translate>Submit</button>
                 </div>
                 </div>
-            </form>
-      </div>
+           </form>
+      </div>-->
 
+      <div *ngIf="write_new_comment" class="spacing-m-top d-flex justify-content-between">
+            <div class="d-flex flex-column comment w-6">
+            </div>
+            <form (ngSubmit)="addComment()" [formGroup]="addcommentForm" class="container-fluid marg-0 padd-0" novalidate>
+              <div class="form-group">
+                <label class="d-block">
+                    <textarea class="form-control" formControlName="text" autocomplete="" aria-label="new Comment text area" rows="9"></textarea>
+                    <div class="alert alert-danger spacing-m-top" role="alert" [hidden]="addcommentForm.controls.text.valid || addcommentForm.controls.text.untouched">
+                        <small translate>You need to add some text to add a comment.</small>
+                    </div>
+                </label>
+                <div class="clearfix spacing-m-top">
+                    <button type="submit" name="button" class="btn btn-success float-right" [disabled]="addcommentForm.invalid || isLoading" translate>Submit</button>
+                </div>
+                </div>
+           </form>
+      </div>
 
     <div *ngFor="let comment of message.comments" class="spacing-m-all d-flex justify-content-between">
         <div class="d-flex flex-column comment w-6">
@@ -82,7 +99,7 @@
           </div>
           </label>
           <div class="spacing-m-bottom clearfix container-fluid padd-0">
-              <button type="submit" name="button" class="btn btn-success float-right" translate>Submit</button>
+              <button type="submit" name="button" class="btn btn-success float-right" [disabled]="newmessageForm.invalid || isLoading" translate>Submit</button>
           </div>
         </div>
         </div>

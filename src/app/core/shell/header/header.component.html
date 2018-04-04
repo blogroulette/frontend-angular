@@ -16,9 +16,12 @@
           </div>
         </div>
         <div class="nav-item">
-            <button *ngIf="!this.isSettings" class="btn btn-outline-primary my-2 my-sm-0" routerLink="/settings" (click)="this.isSettings = !this.isSettings;"><i class="fas fa-wrench"></i></button>
-            <button *ngIf="this.isSettings" class="btn btn-outline-primary my-2 my-sm-0" routerLink="/roulette" (click)="this.isSettings = !this.isSettings;"><i class="fas fa-comment"></i></button>
-            <button class="btn btn-outline-primary my-2 my-sm-0" (click)="logout()"><i class="fas fa-sign-out-alt"></i></button>
+          <button type="button" class="btn buttn btn-outline-primary" [routerLink]="[isSettings ? '/roulette' : '/settings']" (click)="this.isSettings = !this.isSettings;"
+            data-toggle="tooltip" data-placement="left" title="'Toggle create new message.' | translate">
+            <i *ngIf="!isSettings" class="fas fa-wrench"></i>
+            <i *ngIf="isSettings" class="fas fa-comment"></i>
+        </button>
+            <button class="btn buttn btn-outline-primary" (click)="logout()"><i class="fas fa-sign-out-alt"></i></button>
         </div>
       </div>
     </div>

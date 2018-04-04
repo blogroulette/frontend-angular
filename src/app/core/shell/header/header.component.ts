@@ -12,7 +12,7 @@ import { I18nService } from '../../i18n.service';
 export class HeaderComponent implements OnInit {
 
   menuHidden = true;
-  isSettings: false;
+  isSettings: boolean;
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService,

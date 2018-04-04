@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
-import { RouletteService, Message, Comment } from './roulette.service';
+import { RouletteService, Message, Comment, Status } from './roulette.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -15,9 +15,9 @@ export class RouletteComponent implements OnInit {
   isLoading: boolean;
   write_new_message: boolean;
   write_new_comment: boolean;
-  error: string;
+  status: Status;
   newmessageForm: FormGroup;
-  newcommentForm: FormGroup;
+  addcommentForm: FormGroup;
 
   constructor(private rouletteService: RouletteService,
               private formBuilder: FormBuilder) {
@@ -39,35 +39,51 @@ export class RouletteComponent implements OnInit {
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((doc: Message) => { this.message = doc; });
   }
-  addComment(mid: number){
-    alert(this.message.messageid + "" + this.newcommentForm.value.text);
-    this.write_new_comment = false;
+  addComment(){
+    this.isLoading = true;
+    this.rouletteService.addComment(this.addcommentForm.value)
+      .pipe(finalize(() => { this.isLoading = false; }))
+      .subscribe((status: Status) => {
+        this.status = status;
+        this.write_new_comment = false;
+      });
   }
   addMessage(){
     this.isLoading = true;
-    this.rouletteService.getDocumentation()
+    this.rouletteService.addMessage(this.newmessageForm.value)
       .pipe(finalize(() => { this.isLoading = false; }))
-      .subscribe((doc: Message) => {
-        this.message = doc;
-        this.write_new_comment = false;
+      .subscribe((status: Status) => {
+        this.status = status;
+        this.write_new_message = false;
       });
-
   }
   upvoteComment(comment: Comment){
     this.rouletteService.upvoteComment({id: comment.commentid})
-      .subscribe(() => { comment.votes = comment.votes +1; });
+      .subscribe((status: Status) => {
+        this.status = status;
+        comment.votes = comment.votes +1;
+      });
   }
   downvoteComment(comment: Comment){
     this.rouletteService.downvoteComment({id: comment.commentid})
-      .subscribe(() => { comment.votes = comment.votes -1; });
+      .subscribe((status: Status) => {
+        this.status = status;
+        comment.votes = comment.votes -1;
+      });
   }
   upvoteMessage(){
     this.rouletteService.upvoteMessage({id: this.message.messageid})
-      .subscribe(() => { this.message.votes = this.message.votes +1; });
+      .subscribe((status: Status) => {
+        this.status = status;
+        this.message.votes = this.message.votes +1;
+      });
   }
   downvotemessage(){
     this.rouletteService.upvoteMessage({id: this.message.messageid})
-      .subscribe(() => { this.message.votes = this.message.votes -1; });
+      .subscribe((status: Status) => {
+        this.status = status;
+        this.message.votes = this.message.votes -1;
+      });
   }
 
   private createForm() {
@@ -75,7 +91,7 @@ export class RouletteComponent implements OnInit {
       title: ['', Validators.required],
       text: ['', Validators.required]
     });
-    this.newcommentForm = this.formBuilder.group({
+    this.addcommentForm = this.formBuilder.group({
       text: ['', Validators.required]
     });
     }
