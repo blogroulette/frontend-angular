@@ -39,6 +39,18 @@ export class RouletteComponent implements OnInit {
     alert("Add Comment for: " + mid);
     this.write_new_comment = false;
   }
+  upvoteComment(comment: Comment){
+    comment.votes = comment.votes + 1;
+  }
+  downvoteComment(comment: Comment){
+    comment.votes = comment.votes - 1;
+  }
+  upvoteMessage(){
+    this.message.votes = this.message.votes + 1;
+  }
+  downvotemessage(){
+    this.message.votes = this.message.votes - 1;
+  }
 
 
 }
