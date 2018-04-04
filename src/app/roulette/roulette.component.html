@@ -13,7 +13,7 @@
           <button type="button" class="btn buttn btn-primary" (click)="upvoteMessage();"><i class="far fa-thumbs-up"></i></button>
           <button type="button" class="btn buttn btn-primary" (click)="downvoteMessage();"><i class="far fa-thumbs-down"></i></button>
         </div>
-        <button type="button" class="btn btn-primary" (click)="write_new_comment = !write_new_comment;" >Add Comment</button>
+        <button type="button" class="btn btn-primary" (click)="write_new_comment = !write_new_comment;" translate>Add Comment</button>
       </div>
     </div>
     <div *ngIf="write_new_comment" class="spacing-top spacing-top d-flex justify-content-between">
@@ -22,7 +22,7 @@
       <div class="d-flex flex-column container-fluid marg-0">
         <textarea class="form-control" aria-label="new comment text area" rows="6"></textarea>
         <div class="clearfix spacing-top container-fluid">
-            <button type="button" name="button" class="btn btn-success float-right" (click)="addComment(this.message.mid);">Submit</button>
+            <button type="button" name="button" class="btn btn-success float-right" (click)="addComment(this.message.mid);" translate>Submit</button>
         </div>
       </div>
       </div>
@@ -39,7 +39,7 @@
           <div class="d-flex flex-column container-fluid marg-0">
             <textarea class="form-control" aria-label="new message text area" rows="9"></textarea>
             <div class="clearfix spacing-top container-fluid">
-                <button type="button" name="button" class="btn btn-success float-right" (click)="addMessage();">Submit</button>
+                <button type="button" name="button" class="btn btn-success float-right" (click)="addMessage();" translate>Submit</button>
             </div>
           </div>
           </div>
