@@ -73,9 +73,9 @@ export class AuthenticationService {
    */
   logout(): Observable<Status> {
     var obs = this.httpClient
+      .authenticate()
       .post<Status>(
-        routes.logout().endpoint, {})
-      .authenticate();
+        routes.logout().endpoint, {});
     this.setCredentials();
     const st = {status: "logoff"}
     return of(st);

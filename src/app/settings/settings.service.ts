@@ -31,16 +31,16 @@ export class SettingsService {
 
   loadSettings(): Observable<Settings> {
     return this.httpClient
+      .authenticate()
       .post<Settings>(
-        routes.load_settings().endpoint, {})
-        .authenticate();
+        routes.load_settings().endpoint, {});
   }
   saveSettings(c: save_settings_context): Observable<Status> {
     return this.httpClient
+      .authenticate()
       .post<Status>(
         routes.save_settings(c).endpoint,
-        routes.save_settings(c).body)
-        .authenticate();
+        routes.save_settings(c).body);
   }
 
 }

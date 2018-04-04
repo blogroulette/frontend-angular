@@ -85,45 +85,45 @@ export class RouletteService {
   }
   addMessage(c: add_message_context): Observable<Status> {
     return this.httpClient
+      .authenticate()
       .post<Status>(
         routes.add_message(c).endpoint,
-        routes.add_message(c).body)
-        .authenticate();
+        routes.add_message(c).body);
   }
   upvoteMessage(c: vote_context): Observable<Status> {
     return this.httpClient
+      .authenticate()
       .post<Status>(
         routes.upvote_message(c).endpoint,
-        routes.upvote_message(c).body)
-        .authenticate();
+        routes.upvote_message(c).body);
   }
   downvoteMessage(c: vote_context): Observable<Status> {
     return this.httpClient
+      .authenticate()
       .post<Status>(
         routes.downvote_message(c).endpoint,
-        routes.downvote_message(c).body)
-        .authenticate();
+        routes.downvote_message(c).body);
   }
   addComment(c: add_comment_context): Observable<Status> {
     return this.httpClient
+      .authenticate()
       .post<Status>(
         routes.add_comment(c).endpoint,
-        routes.add_comment(c).body)
-        .authenticate();
+        routes.add_comment(c).body);
   }
   upvoteComment(c: vote_context): Observable<Status> {
     return this.httpClient
+      .authenticate()
       .post<Status>(
         routes.upvote_comment(c).endpoint,
-        routes.upvote_comment(c).body)
-        .authenticate();
+        routes.upvote_comment(c).body);
   }
   downvoteComment(c: vote_context): Observable<Status> {
     return this.httpClient
+      .authenticate()
       .post<Status>(
         routes.downvote_comment(c).endpoint,
-        routes.downvote_comment(c).body)
-        .authenticate();
+        routes.downvote_comment(c).body);
   }
 }
 
