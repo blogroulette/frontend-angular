@@ -102,23 +102,12 @@ RESPONSE{
 }
 ```
 
-#### upvoteMessage:Authenticated
+#### voteMessage:Authenticated
 ```
-ENDPOINT: UpvoteMessage
+ENDPOINT: VoteMessage
 POST{
-  messageid: string;
-}
-RESPONSE{
-  status: string,
-  error?: string,
-}
-```
-
-#### downvoteMessage:Authenticated
-```
-ENDPOINT: DownvoteMessage
-POST{
-  messageid: string;
+  messageid: string,
+  vote: up|down
 }
 RESPONSE{
   status: string,
@@ -139,23 +128,13 @@ RESPONSE{
 }
 ```
 
-#### upvoteComment:Authenticated
+#### voteComment:Authenticated
 ```
-ENDPOINT: UpvoteComment
+ENDPOINT: VoteComment
 POST{
   commentid: string;
-}
-RESPONSE{
-  status: string,
-  error?: string,
-}
-```
-
-#### downvoteComment:Authenticated
-```
-ENDPOINT: DownvoteComment
-POST{
-  commentid: string;
+  messageid: string,
+  vote: up|down
 }
 RESPONSE{
   status: string,
