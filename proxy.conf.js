@@ -12,7 +12,7 @@ const proxyConfig = [
   {
     context: '/api',
     pathRewrite: { '^/api': '' },
-    target: 'https://api.blogroulette.net',
+    target: 'http://localhost:8080/blogroulette-jee',
     changeOrigin: true,
     secure: true
   }
