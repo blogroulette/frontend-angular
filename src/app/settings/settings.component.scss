@@ -1,8 +1,14 @@
+.spacing-m-all {
+  margin: .5em;
+}
 .spacing-all {
-  padding: .25em .5em .25em .5em;
+  padding: .5em;
 }
 .spacing-top {
   margin-top: 1em;
+}
+.spacing-top-small {
+  margin-top: .2em;
 }
 .flex-grow {
   flex: 1 0 12em;

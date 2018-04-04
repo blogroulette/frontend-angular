@@ -7,11 +7,13 @@ import { SharedModule } from '@app/shared';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from './settings.component';
 import { SettingsService } from './settings.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     TranslateModule,
+    ReactiveFormsModule,
     CoreModule,
     SharedModule,
     SettingsRoutingModule

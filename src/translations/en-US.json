@@ -24,5 +24,8 @@
   "User could not be registered": "User could not be registered",
   "a Password is required": "a Password is required",
   "Passwords do not match": "Passwords do not match",
-  "Title": "Title"
+  "Title": "Title",
+  "You need to add some text to add a comment.": "You need to add some text to add a comment.",
+  "You need to add a title to add a message.": "You need to add a title to add a message.",
+  "You need to add some text to add a message.": "You need to add some text to add a message."
 }

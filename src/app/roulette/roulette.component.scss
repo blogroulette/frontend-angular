@@ -1,8 +1,23 @@
 .spacing-all {
-  padding: .25em .5em .25em .5em;
+  padding: .5em .5em 0 .5em;
 }
-.spacing-top {
+.spacing-m-all {
+  margin: .5em .5em 0 .5em;
+}
+.spacing-all-v {
+  padding: 0 .5em 0 .5em;
+}
+.spacing-all-x {
+  padding: .5em 0 .5em 0;
+}
+.spacing-m-top {
   margin-top: 1em;
+}
+.spacing-m-bottom {
+  margin-bottom: 1em;
+}
+article  {
+  min-height: 6rem;
 }
 .comment {
   margin-left: 1em;
@@ -31,5 +46,7 @@
 }
 .marg-0 {
   margin: 0;
-  padding: 0;
+}
+.padd-0 {
+padding: 0;
 }

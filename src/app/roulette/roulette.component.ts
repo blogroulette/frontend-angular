@@ -12,7 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class RouletteComponent implements OnInit {
 
   message: Message;
-  message_isLoading: boolean;
+  isLoading: boolean;
   write_new_message: boolean;
   write_new_comment: boolean;
   error: string;
@@ -28,15 +28,15 @@ export class RouletteComponent implements OnInit {
     this.getMessage();
   }
   getMessage(){
-    this.message_isLoading = true;
+    this.isLoading = true;
     this.rouletteService.getRandomMessage()
-      .pipe(finalize(() => { this.message_isLoading = false; }))
+      .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((message: Message) => { this.message = message; });
   }
   getDoc(){
-    this.message_isLoading = true;
+    this.isLoading = true;
     this.rouletteService.getDocumentation()
-      .pipe(finalize(() => { this.message_isLoading = false; }))
+      .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((doc: Message) => { this.message = doc; });
   }
   addComment(mid: number){
@@ -44,20 +44,30 @@ export class RouletteComponent implements OnInit {
     this.write_new_comment = false;
   }
   addMessage(){
-    alert(this.newmessageForm.value.title + "" + this.newmessageForm.value.text);
-    this.write_new_comment = false;
+    this.isLoading = true;
+    this.rouletteService.getDocumentation()
+      .pipe(finalize(() => { this.isLoading = false; }))
+      .subscribe((doc: Message) => {
+        this.message = doc;
+        this.write_new_comment = false;
+      });
+
   }
   upvoteComment(comment: Comment){
-    comment.votes = comment.votes + 1;
+    this.rouletteService.upvoteComment({id: comment.commentid})
+      .subscribe(() => { comment.votes = comment.votes +1; });
   }
   downvoteComment(comment: Comment){
-    comment.votes = comment.votes - 1;
+    this.rouletteService.downvoteComment({id: comment.commentid})
+      .subscribe(() => { comment.votes = comment.votes -1; });
   }
   upvoteMessage(){
-    this.message.votes = this.message.votes + 1;
+    this.rouletteService.upvoteMessage({id: this.message.messageid})
+      .subscribe(() => { this.message.votes = this.message.votes +1; });
   }
   downvotemessage(){
-    this.message.votes = this.message.votes - 1;
+    this.rouletteService.upvoteMessage({id: this.message.messageid})
+      .subscribe(() => { this.message.votes = this.message.votes -1; });
   }
 
   private createForm() {

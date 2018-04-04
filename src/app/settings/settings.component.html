@@ -1,31 +1,41 @@
 <div class="container">
   <div class="card spacing-all">
     <h2 translate>Settings</h2>
-    <div class="container row">
-      <div class="d-flex flex-row container-fluid">
-        <span class="spacing-all spacing-top flex-elem-6"><span class="badge badge-success float-right" translate>Available</span></span>
-        <span class="flex-grow"><input type="text" class="form-control spacing-all spacing-top" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"></span>
-        <span class="spacing-all spacing-top flex-elem-12 align-middle" translate>Username</span>
+    <form class="container marg-0 padd-0" (ngSubmit)="saveSettings()" [formGroup]="savesettingsForm" novalidate>
+      <label class="d-block">
+          <input type="text" class="form-control " formControlName="username" autocomplete="username"
+              [placeholder]="'Username' | translate"/>
+          <div class="alert alert-danger spacing-m-top spacing-top-small" role="alert" [hidden]="savesettingsForm.controls.username.valid || savesettingsForm.controls.username.untouched">
+          <small translate>Not Available.</small>
+          </div>
+      </label>
+      <label class="d-block">
+          <input type="text" class="form-control " formControlName="password" autocomplete="Password"
+              [placeholder]="'Current Password' | translate"/>
+          <div class="alert alert-danger spacing-m-top spacing-top-small" role="alert" [hidden]="savesettingsForm.controls.password.valid || savesettingsForm.controls.password.untouched">
+              <small translate>Enter your password.</small>
+          </div>
+      </label>
+      <label class="d-block">
+          <input type="text" class="form-control " formControlName="new_password" autocomplete="New Password"
+              [placeholder]="'New Password' | translate"/>
+          <div class="alert alert-danger spacing-m-top spacing-top-small" role="alert" [hidden]="savesettingsForm.controls.new_password.valid || savesettingsForm.controls.new_password.untouched">
+              <small translate>Enter your password.</small>
+          </div>
+      </label>
+      <label class="d-block">
+          <input type="text" class="form-control " formControlName="rnew_password" autocomplete="Repeat New Password"
+              [placeholder]="'Repeat New Password' | translate"/>
+          <div class="alert alert-danger spacing-m-top spacing-top-small" role="alert" [hidden]="savesettingsForm.controls.rnew_password.valid || savesettingsForm.controls.rnew_password.untouched"
+              ><small translate>Passwords do not match.</small>
+          </div>
+      </label>
+      <div *ngIf="this.status" class="alert alert-danger spacing-m-top" role="alert">
+              <b>{{status.satus}}</b><small translate>{{status.error}}</small>
       </div>
-      <div class="d-flex flex-row container-fluid">
-        <span class="spacing-all spacing-top flex-elem-6"><span class="badge badge-success float-right" translate>Ok</span></span>
-        <span class="flex-grow"><input type="text" class="form-control spacing-all spacing-top" placeholder="New Password" aria-label="Username" aria-describedby="basic-addon1"></span>
-        <span class="spacing-all spacing-top flex-elem-12 align-middle" translate>New Password</span>
+      <div class="clearfix spacing-top">
+          <button type="submit" name="button" class="btn btn-success spacing-top float-right" translate>Submit</button>
       </div>
-      <div class="d-flex flex-row container-fluid">
-        <span class="spacing-all spacing-top flex-elem-6"><span class="badge badge-danger float-right" translate>Mismatch</span></span>
-        <span class="flex-grow"><input type="text" class="form-control spacing-all spacing-top" placeholder="Repeat New Password" aria-label="Username" aria-describedby="basic-addon1"></span>
-        <span class="spacing-all spacing-top flex-elem-12 align-middle" translate>Repeat New Password</span>
-      </div>
-      <div class="d-flex flex-row container-fluid">
-        <span class="spacing-all spacing-top flex-elem-6"><span class="badge badge-danger float-right" translate>Wrong</span></span>
-        <span class="flex-grow"><input type="text" class="form-control spacing-all spacing-top" placeholder="Current Password" aria-label="Username" aria-describedby="basic-addon1"></span>
-        <span class="spacing-all spacing-top flex-elem-12 align-middle" translate>Current Password</span>
-      </div>
-      <div class="clearfix spacing-top container-fluid">
-          <button type="button" name="button" class="btn btn-success spacing-top float-right" translate>Submit</button>
-      </div>
-      <div class="spacing-top"></div>
-    </div>
+    </form>
   </div>
 </div>
