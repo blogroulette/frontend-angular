@@ -4,6 +4,7 @@
   "Home": "übersetzen",
   "Logged in as": "übersetzen",
   "Login": "übersetzen",
+  "Register": "übersetzen",
   "Logout": "übersetzen",
   "Password": "übersetzen",
   "Password is required": "übersetzen",
@@ -18,5 +19,10 @@
   "Repeat New Password": "übersetzen",
   "Current Password": "übersetzen",
   "Submit": "übersetzen",
-  "Add Comment": "übersetzen"
+  "Add Comment": "übersetzen",
+  "Invite Token": "übersetzen",
+  "The Token is required": "übersetzen",
+  "User could not be registered": "übersetzen",
+  "a Password is required": "übersetzen",
+  "Passwords do not match": "übersetzen"
 }

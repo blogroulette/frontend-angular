@@ -14,6 +14,11 @@ export interface LoginContext {
   password: string;
   remember?: boolean;
 }
+export interface RegisterContext {
+  invitetoken: string;
+  username: string;
+  password: string;
+}
 
 export interface Status {
   status: string;
@@ -24,6 +29,14 @@ const routes = {
   login: (c: LoginContext) => {return ({
     endpoint: "Login",
     body: {
+      username: c.username,
+      password: c.password,
+    },
+  });},
+  register: (c: RegisterContext) => {return ({
+    endpoint: "Register",
+    body: {
+      invitetoken: c.invitetoken,
       username: c.username,
       password: c.password,
     },
@@ -63,6 +76,22 @@ export class AuthenticationService {
         routes.login(c).body);
     obs.subscribe((credentials: Credentials) => {
         this.setCredentials(credentials, c.remember);
+        });
+    return obs;
+  }
+
+  /**
+   * Registers the user.
+   * @param {RegisterContext} context The register parameters.
+   * @return {Observable<Credentials>} The user credentials.
+   */
+  register(c: RegisterContext): Observable<Credentials> {
+    var obs = this.httpClient
+      .post<Credentials>(
+        routes.register(c).endpoint,
+        routes.register(c).body);
+    obs.subscribe((credentials: Credentials) => {
+        this.setCredentials(credentials);
         });
     return obs;
   }

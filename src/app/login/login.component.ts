@@ -18,7 +18,9 @@ export class LoginComponent implements OnInit {
   version: string = environment.version;
   error: string;
   loginForm: FormGroup;
+  registerForm: FormGroup;
   isLoading = false;
+  register_user: boolean;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -34,6 +36,22 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.loginForm.value)
       .pipe(finalize(() => {
         this.loginForm.markAsPristine();
+        this.isLoading = false;
+      }))
+      .subscribe(credentials => {
+        log.debug(`${credentials.username} successfully logged in`);
+        this.router.navigate(['/'], { replaceUrl: true });
+      }, error => {
+        log.debug(`Login error: ${error}`);
+        this.error = error;
+      });
+  }
+
+  register() {
+    this.isLoading = true;
+    this.authenticationService.register(this.registerForm.value)
+      .pipe(finalize(() => {
+        this.registerForm.markAsPristine();
         this.isLoading = false;
       }))
       .subscribe(credentials => {
@@ -62,6 +80,12 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
       remember: true
+    });
+    this.registerForm = this.formBuilder.group({
+      invitetoken: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      rpassword: ['', Validators.required]
     });
   }
 

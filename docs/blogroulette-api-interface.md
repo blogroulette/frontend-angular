@@ -10,6 +10,7 @@ POST{
   password: string,
 }
 RESPONSE{
+  username: string,
   token: string,
 }
 ```
@@ -33,8 +34,8 @@ POST{
   password: string,
 }
 RESPONSE{
-  status: string,
-  error?: string,
+  username: string,
+  token: string,
 }
 ```
 
