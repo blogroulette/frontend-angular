@@ -40,7 +40,7 @@ export class RouletteComponent implements OnInit {
     this.isLoading = true;
     this.rouletteService.getDocumentation()
       .pipe(finalize(() => { this.isLoading = false; }))
-      .subscribe((doc: Message) => { this.message = doc; });
+      .subscribe((message: Message) => { message.comments.reverse();this.message = message; });
   }
   addComment(){
     if (this.addcommentForm.invalid){this.status={status: "error", error: "Invalid comment format."};return;}
