@@ -29,7 +29,6 @@ RESPONSE{
 ```
 ENDPOINT: Register
 POST{
-  invitetoken: string,
   username: string,
   password: string,
 }
