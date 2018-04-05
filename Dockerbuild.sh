@@ -10,7 +10,7 @@ PACKAGE_VERSION=$(node -pe "require('./package.json').version")
 
 echo "Building container :latest and :$PACKAGE_VERSION"
 docker build \
-	-t saschascherrer/blogroulette-frontend:latest \
-	-t saschascherrer/blogroulette-frontend:$PACKAGE_VERSION \
+	-t blogroulette/blogroulette-frontend:latest \
+	-t blogroulette/blogroulette-frontend:$PACKAGE_VERSION \
 	.
 
