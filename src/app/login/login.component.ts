@@ -82,7 +82,6 @@ export class LoginComponent implements OnInit {
       remember: true
     });
     this.registerForm = this.formBuilder.group({
-      invitetoken: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
       rpassword: ['', Validators.required]
