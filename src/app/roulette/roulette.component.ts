@@ -45,7 +45,7 @@ export class RouletteComponent implements OnInit {
   addComment(){
     if (this.addcommentForm.invalid){this.status={status: "error", error: "Invalid comment format."};return;}
     this.isLoading = true;
-    this.rouletteService.addComment(this.addcommentForm.value)
+    this.rouletteService.addComment({ text: this.addcommentForm.value.text, messageid: this.message.messageid})
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((status: Status) => {
         this.status = status;
