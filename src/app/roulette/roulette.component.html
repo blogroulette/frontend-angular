@@ -1,8 +1,12 @@
 <div class="container">
   <div class="text-center">
-    <div *ngIf="status" class="alert alert-danger spacing-m-top" role="alert" (click)="status = null;"
+    <div *ngIf="status && status.status != 'ok'" class="alert alert-danger spacing-m-top" role="alert" (click)="status = null;"
           translate>
-          <b>{{status.status}}</b><small *ngIf="status.error">{{status.error}}</small>
+          <b>{{status.status | translate}}</b><small *ngIf="status.error"> {{status.error | translate}}</small>
+    </div>
+    <div *ngIf="status && status.status == 'ok'" class="alert alert-success spacing-m-top" role="alert" (click)="status = null;"
+          translate>
+          <b>{{status.status | translate}}</b><small *ngIf="status.error"> {{status.error | translate}}</small>
     </div>
     <button id="other-message" type="button" class="btn btn-outline-primary spacing-m-top" (click)="getMessage(); write_new_message = false;" data-toggle="tooltip"
     data-placement="top" title="'Get another random message.' | translate">
@@ -73,16 +77,14 @@
             <label class="d-block">
           <input type="text" class="form-control " formControlName="title" autocomplete="title"
                  [placeholder]="'Title' | translate"/>
-          <div class="alert alert-danger spacing-m-top" role="alert" [hidden]="newmessageForm.controls.title.valid || newmessageForm.controls.title.untouched"
-                translate>
-                <small>You need to add a title to add a message.</small>
+          <div class="alert alert-danger spacing-m-top" role="alert" [hidden]="newmessageForm.controls.title.valid || newmessageForm.controls.title.untouched">
+                <small translate>You need to add a title to add a message.</small>
           </div>
           </label>
           <label class="d-block">
           <textarea class="form-control" formControlName="text" autocomplete="" aria-label="new message text area" rows="9"></textarea>
-          <div class="alert alert-danger spacing-m-top" role="alert" [hidden]="newmessageForm.controls.text.valid || newmessageForm.controls.text.untouched"
-                translate>
-                <small>You need to add some text to add a message.</small>
+          <div class="alert alert-danger spacing-m-top" role="alert" [hidden]="newmessageForm.controls.text.valid || newmessageForm.controls.text.untouched">
+                <small translate>You need to add some text to add a message.</small>
           </div>
           </label>
           <div class="spacing-m-bottom clearfix container-fluid padd-0">
