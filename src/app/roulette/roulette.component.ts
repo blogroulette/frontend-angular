@@ -84,7 +84,7 @@ export class RouletteComponent implements OnInit {
       });
   }
   downvoteMessage(){
-    this.rouletteService.upvoteMessage({id: this.message.messageid})
+    this.rouletteService.downvoteMessage({id: this.message.messageid})
       .subscribe((status: Status) => {
         this.status = status;
         this.message.votes = this.message.votes*1 -1;
