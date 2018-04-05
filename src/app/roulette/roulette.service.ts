@@ -152,8 +152,8 @@ export interface Message {
   comments?: Comment[];
 }
 export interface Comment {
-  commentid: string,
-  timestamp: string,
+  commentid?: string,
+  timestamp?: string,
   text: string,
   votes: number,
 }

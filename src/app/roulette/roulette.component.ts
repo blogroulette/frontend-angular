@@ -52,6 +52,7 @@ export class RouletteComponent implements OnInit {
         this.write_new_comment = false;
         this.addcommentForm.value.text = null;
         this.write_new_comment = false;
+        this.message.comments.push({ text: this.addcommentForm.value.text, votes: 0 });
       });
   }
   addMessage(){
