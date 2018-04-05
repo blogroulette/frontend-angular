@@ -7,7 +7,7 @@ import { SettingsComponent } from './settings.component';
 const routes: Routes = [
   Route.withShell([
     { path: '', redirectTo: '/settings', pathMatch: 'full' },
-    { path: 'settings', component: SettingsComponent, data: { title: extract('Settings') } }
+    { path: 'settings', component: SettingsComponent, data: { title: extract('Blogroulette Settings') } }
   ])
 ];
 

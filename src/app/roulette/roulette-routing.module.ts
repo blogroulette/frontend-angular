@@ -7,7 +7,7 @@ import { RouletteComponent } from './roulette.component';
 const routes: Routes = [
   Route.withShell([
     { path: '', redirectTo: '/roulette', pathMatch: 'full' },
-    { path: 'roulette', component: RouletteComponent, data: { title: extract('roulette') } }
+    { path: 'roulette', component: RouletteComponent, data: { title: extract('Blogroulette') } }
   ])
 ];
 
