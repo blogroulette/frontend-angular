@@ -35,24 +35,6 @@
       </div>
     </div>
 
-      <div *ngIf="write_new_comment" class="spacing-m-top d-flex justify-content-between">
-            <div class="d-flex flex-column comment w-6">
-            </div>
-            <form (ngSubmit)="addComment()" [formGroup]="addcommentForm" class="container-fluid marg-0 padd-0" novalidate>
-              <div class="form-group">
-                <label class="d-block">
-                    <textarea class="form-control" formControlName="text" autocomplete="" aria-label="new Comment text area" rows="9"></textarea>
-                    <div class="alert alert-danger spacing-m-top" role="alert" [hidden]="addcommentForm.controls.text.valid || addcommentForm.controls.text.untouched">
-                        <small translate>You need to add some text to add a comment.</small>
-                    </div>
-                </label>
-                <div class="clearfix spacing-m-top">
-                    <button type="submit" name="button" class="btn btn-success float-right" [disabled]="addcommentForm.invalid || isLoading" translate>Submit</button>
-                </div>
-                </div>
-           </form>
-      </div>
-
     <div *ngIf="message">
       <div *ngFor="let comment of message.comments" class="spacing-m-all d-flex justify-content-between">
           <div class="d-flex flex-column comment w-6">
@@ -66,6 +48,24 @@
           </div>
             <article class="form-control" aria-label="comment text area">{{comment.text}}</article>
         </div>
+    </div>
+
+    <div *ngIf="write_new_comment" class="spacing-m-top d-flex justify-content-between">
+          <div class="d-flex flex-column comment w-6">
+          </div>
+          <form (ngSubmit)="addComment()" [formGroup]="addcommentForm" class="container-fluid marg-0 padd-0" novalidate>
+            <div class="form-group">
+              <label class="d-block">
+                  <textarea class="form-control" formControlName="text" autocomplete="" aria-label="new Comment text area" rows="9"></textarea>
+                  <div class="alert alert-danger spacing-m-top" role="alert" [hidden]="addcommentForm.controls.text.valid || addcommentForm.controls.text.untouched">
+                      <small translate>You need to add some text to add a comment.</small>
+                  </div>
+              </label>
+              <div class="clearfix spacing-m-top">
+                  <button type="submit" name="button" class="btn btn-success float-right" [disabled]="addcommentForm.invalid || isLoading" translate>Submit</button>
+              </div>
+              </div>
+         </form>
     </div>
 
   </div>
