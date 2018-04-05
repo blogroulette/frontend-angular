@@ -102,14 +102,14 @@ export class RouletteService {
         routes.add_message(c).endpoint,
         routes.add_message(c).body);
   }
-  upvoteMessage(c: vote_context): Observable<Status> {
+  upvoteMessage(c: message_vote_context): Observable<Status> {
     console.log("Upvote message");
     return this.httpClient
       .post<Status>(
         routes.upvote_message(c).endpoint,
         routes.upvote_message(c).body);
   }
-  downvoteMessage(c: vote_context): Observable<Status> {
+  downvoteMessage(c: message_vote_context): Observable<Status> {
     return this.httpClient
       .post<Status>(
         routes.downvote_message(c).endpoint,
@@ -121,13 +121,13 @@ export class RouletteService {
         routes.add_comment(c).endpoint,
         routes.add_comment(c).body);
   }
-  upvoteComment(c: vote_context): Observable<Status> {
+  upvoteComment(c: comment_vote_context): Observable<Status> {
     return this.httpClient
       .post<Status>(
         routes.upvote_comment(c).endpoint,
         routes.upvote_comment(c).body);
   }
-  downvoteComment(c: vote_context): Observable<Status> {
+  downvoteComment(c: comment_vote_context): Observable<Status> {
     return this.httpClient
       .post<Status>(
         routes.downvote_comment(c).endpoint,
