@@ -70,12 +70,10 @@ export class AuthenticationService {
    * @return {Observable<Credentials>} The user credentials.
    */
   login(c: LoginContext): Observable<Credentials> {
-    var obss = {username: "user", token: "testtoken1234"};/*= this.httpClient
+    var obs = this.httpClient
       .post<Credentials>(
         routes.login(c).endpoint,
         routes.login(c).body);
-      */
-    var obs = of(obss);
     obs.subscribe((credentials: Credentials) => {
         this.setCredentials(credentials, c.remember);
         });
