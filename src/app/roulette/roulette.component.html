@@ -39,10 +39,10 @@
       <div *ngFor="let comment of message.comments" class="spacing-m-all d-flex justify-content-between">
           <div class="d-flex flex-column comment w-6">
             <span class="btn">{{comment.votes}}</span>
-            <button type="button" class="btn buttn btn-primary" (click)="upvoteComment(comment);"
+            <button type="button" class="btn buttn btn-primary" (click)="upvoteComment(comment);" [disabled]="!comment.commentid || isLoading"
                 data-toggle="tooltip" data-placement="top" title="'Upvote Comment' | translate">
                 <i class="far fa-thumbs-up"></i></button>
-            <button type="button" class="btn buttn btn-primary" (click)="downvoteComment(comment);"
+            <button type="button" class="btn buttn btn-primary" (click)="downvoteComment(comment);" [disabled]="!comment.commentid || isLoading"
                 data-toggle="tooltip" data-placement="top" title="'Downvote Comment' | translate">
                 <i class="far fa-thumbs-down"></i></button>
           </div>
