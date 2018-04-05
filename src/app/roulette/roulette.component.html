@@ -2,7 +2,7 @@
   <div class="text-center">
     <div *ngIf="status" class="alert alert-danger spacing-m-top" role="alert" (click)="status = null;"
           translate>
-          <b>{{status.status}}</b><small>{{status.error}}</small>
+          <b>{{status.status}}</b><small *ngIf="status.error">{{status.error}}</small>
     </div>
     <button id="other-message" type="button" class="btn btn-outline-primary spacing-m-top" (click)="getMessage(); write_new_message = false;" data-toggle="tooltip"
     data-placement="top" title="'Get another random message.' | translate">

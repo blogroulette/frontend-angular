@@ -43,9 +43,9 @@ export class RouletteComponent implements OnInit {
       .subscribe((doc: Message) => { this.message = doc; });
   }
   addComment(){
-    alert("addComment");
+    if (this.addcommentForm.invalid){this.status={status: "error", error: "Invalid comment format."};return;}
     this.isLoading = true;
-    this.rouletteService.addComment({ messageid: "testid", text: "testinhalt"})
+    this.rouletteService.addComment(this.addcommentForm.value)
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((status: Status) => {
         this.status = status;
@@ -53,9 +53,9 @@ export class RouletteComponent implements OnInit {
       });
   }
   addMessage(){
-    alert("addMessage");
+    if (this.newmessageForm.invalid){this.status={status: "error", error: "Invalid message format."};return;}
     this.isLoading = true;
-    this.rouletteService.addMessage( { title: "testtitle", text: "testinhalt"})
+    this.rouletteService.addMessage(this.newmessageForm.value)
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((status: Status) => {
         this.status = status;
@@ -63,7 +63,6 @@ export class RouletteComponent implements OnInit {
       });
   }
   upvoteComment(comment: Comment){
-    alert("upvoteComment" + comment);
     this.rouletteService.upvoteComment({id: comment.commentid})
       .subscribe((status: Status) => {
         this.status = status;
@@ -71,7 +70,6 @@ export class RouletteComponent implements OnInit {
       });
   }
   protected downvoteComment(comment: Comment){
-    alert("downvoteComment" + comment);
     this.rouletteService.downvoteComment({id: comment.commentid})
       .subscribe((status: Status) => {
         this.status = status;
@@ -79,7 +77,6 @@ export class RouletteComponent implements OnInit {
       });
   }
   protected upvoteMessage(){
-    alert("upvoteMessage");
     this.rouletteService.upvoteMessage({id: this.message.messageid})
       .subscribe((status: Status) => {
         this.status = status;
@@ -87,7 +84,6 @@ export class RouletteComponent implements OnInit {
       });
   }
   protected downvoteMessage(){
-    alert("downvoteMessage");
     this.rouletteService.upvoteMessage({id: this.message.messageid})
       .subscribe((status: Status) => {
         this.status = status;
