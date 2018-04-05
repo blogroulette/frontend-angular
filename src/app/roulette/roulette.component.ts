@@ -22,6 +22,9 @@ export class RouletteComponent implements OnInit {
   constructor(private rouletteService: RouletteService,
               private formBuilder: FormBuilder) {
                 this.createForm();
+                this.write_new_message= false;
+                this.write_new_comment= false;
+                this.isLoading=false;
   }
 
   ngOnInit() {
@@ -40,8 +43,9 @@ export class RouletteComponent implements OnInit {
       .subscribe((doc: Message) => { this.message = doc; });
   }
   addComment(){
+    alert("addComment");
     this.isLoading = true;
-    this.rouletteService.addComment(this.addcommentForm.value)
+    this.rouletteService.addComment({ messageid: "testid", text: "testinhalt"})
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((status: Status) => {
         this.status = status;
@@ -49,8 +53,9 @@ export class RouletteComponent implements OnInit {
       });
   }
   addMessage(){
+    alert("addMessage");
     this.isLoading = true;
-    this.rouletteService.addMessage(this.newmessageForm.value)
+    this.rouletteService.addMessage( { title: "testtitle", text: "testinhalt"})
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((status: Status) => {
         this.status = status;
@@ -58,27 +63,31 @@ export class RouletteComponent implements OnInit {
       });
   }
   upvoteComment(comment: Comment){
+    alert("upvoteComment" + comment);
     this.rouletteService.upvoteComment({id: comment.commentid})
       .subscribe((status: Status) => {
         this.status = status;
         comment.votes = comment.votes +1;
       });
   }
-  downvoteComment(comment: Comment){
+  protected downvoteComment(comment: Comment){
+    alert("downvoteComment" + comment);
     this.rouletteService.downvoteComment({id: comment.commentid})
       .subscribe((status: Status) => {
         this.status = status;
         comment.votes = comment.votes -1;
       });
   }
-  upvoteMessage(){
+  protected upvoteMessage(){
+    alert("upvoteMessage");
     this.rouletteService.upvoteMessage({id: this.message.messageid})
       .subscribe((status: Status) => {
         this.status = status;
         this.message.votes = this.message.votes +1;
       });
   }
-  downvotemessage(){
+  protected downvoteMessage(){
+    alert("downvoteMessage");
     this.rouletteService.upvoteMessage({id: this.message.messageid})
       .subscribe((status: Status) => {
         this.status = status;
