@@ -49,10 +49,9 @@ export class RouletteComponent implements OnInit {
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((status: Status) => {
         this.status = status;
+        this.message.comments.unshift({ text: this.addcommentForm.value.text, votes: 0 });
+        this.addcommentForm.reset();
         this.write_new_comment = false;
-        this.addcommentForm.value.text = null;
-        this.write_new_comment = false;
-        this.message.comments.push({ text: this.addcommentForm.value.text, votes: 0 });
       });
   }
   addMessage(){
@@ -63,8 +62,7 @@ export class RouletteComponent implements OnInit {
       .subscribe((status: Status) => {
         this.status = status;
         this.write_new_message = false;
-        this.newmessageForm.value.title = null;
-        this.newmessageForm.value.text = null;
+        this.newmessageForm.reset();
         this.write_new_message = false;
       });
   }
