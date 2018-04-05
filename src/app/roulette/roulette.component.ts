@@ -34,7 +34,7 @@ export class RouletteComponent implements OnInit {
     this.isLoading = true;
     this.rouletteService.getRandomMessage()
       .pipe(finalize(() => { this.isLoading = false; }))
-      .subscribe((message: Message) => { this.message = message; });
+      .subscribe((message: Message) => { message.comments.reverse(); this.message = message; });
   }
   getDoc(){
     this.isLoading = true;
