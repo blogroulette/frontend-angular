@@ -70,21 +70,21 @@ export class RouletteComponent implements OnInit {
       });
   }
   downvoteComment(comment: Comment){
-    this.rouletteService.downvoteComment({id: comment.commentid, messageid: this.message.messageid})
+    this.rouletteService.downvoteComment({commentid: comment.commentid, messageid: this.message.messageid})
       .subscribe((status: Status) => {
         this.status = status;
         comment.votes = comment.votes*1 -1;
       });
   }
   upvoteMessage(){
-    this.rouletteService.upvoteMessage({id: this.message.messageid})
+    this.rouletteService.upvoteMessage({messageid: this.message.messageid})
       .subscribe((status: Status) => {
         this.status = status;
         this.message.votes = this.message.votes*1 +1;
       });
   }
   downvoteMessage(){
-    this.rouletteService.downvoteMessage({id: this.message.messageid})
+    this.rouletteService.downvoteMessage({messageid: this.message.messageid})
       .subscribe((status: Status) => {
         this.status = status;
         this.message.votes = this.message.votes*1 -1;
