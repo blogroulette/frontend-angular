@@ -50,6 +50,8 @@ export class RouletteComponent implements OnInit {
       .subscribe((status: Status) => {
         this.status = status;
         this.write_new_comment = false;
+        this.addcommentForm.value.text = null;
+        this.write_new_comment = false;
       });
   }
   addMessage(){
@@ -59,6 +61,9 @@ export class RouletteComponent implements OnInit {
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((status: Status) => {
         this.status = status;
+        this.write_new_message = false;
+        this.newmessageForm.value.title = null;
+        this.newmessageForm.value.text = null;
         this.write_new_message = false;
       });
   }
