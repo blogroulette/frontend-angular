@@ -46,7 +46,7 @@
             <h2 translate>Register</h2>
             <form (ngSubmit)="register()" [formGroup]="registerForm" novalidate>
               <div class="alert alert-danger" [hidden]="!error || isLoading" translate>
-                User could not be registered
+                {{error}}
               </div>
               <div class="form-group">
                 <label class="d-block">
@@ -59,7 +59,7 @@
                   </small>
                 </label>
                 <label class="d-block">
-                  <input type="password" class="form-control" formControlName="password" autocomplete="new-password"
+                  <input type="password" class="form-control" formControlName="password" autocomplete="new-password" (change)="passwordtest();"
                          [placeholder]="'New Password' | translate" required/>
                   <span hidden translate>New Password</span>
                   <small [hidden]="registerForm.controls.password.valid || registerForm.controls.password.untouched"
@@ -67,6 +67,15 @@
                     a Password is required
                   </small>
                 </label>
+                <div *ngFor="let error of check.errors" class="alert alert-danger marg-bottom-0 spacing-top-small" role="alert">
+                    <small>{{error | translate}}</small>
+                </div>
+                <div *ngIf="!check.strong" class="alert alert-danger spacing-top-small" role="alert">
+                    <b translate>Weak</b>
+                </div>
+                <div *ngIf="check.strong" class="alert alert-success spacing-top-small" role="alert">
+                    <b translate>Strong</b>
+                </div>
                 <label class="d-block">
                   <input type="password" class="form-control" formControlName="rpassword" autocomplete="repeat-new-password"
                          [placeholder]="'Repeat New Password' | translate" required/>

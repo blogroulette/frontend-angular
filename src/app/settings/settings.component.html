@@ -2,6 +2,10 @@
   <div class="card spacing-all">
     <h2 translate>Settings</h2>
     <form class="container marg-0 padd-0" (ngSubmit)="saveSettings()" [formGroup]="savesettingsForm" novalidate>
+      <div *ngIf="status && status.status != 'ok'" class="alert alert-danger spacing-m-top" role="alert" (click)="status = null;"
+            translate>
+            <b>{{status.status | translate}}</b><small *ngIf="status.error"> {{status.error | translate}}</small>
+      </div>
       <label class="d-block">
           <input type="text" class="form-control " formControlName="username" autocomplete="username"
               [placeholder]="'Username' | translate"/>
@@ -17,12 +21,21 @@
           </div>
       </label>
       <label class="d-block">
-          <input type="text" class="form-control " formControlName="new_password" autocomplete="New Password"
+          <input type="text" class="form-control " formControlName="new_password" autocomplete="New Password" (change)="passwordtest();"
               [placeholder]="'New Password' | translate"/>
           <div class="alert alert-danger spacing-m-top spacing-top-small" role="alert" [hidden]="savesettingsForm.controls.new_password.valid || savesettingsForm.controls.new_password.untouched">
-              <small translate>Enter your password.</small>
+              <small translate>Enter New password.</small>
           </div>
       </label>
+      <div *ngFor="let error of check.errors" class="alert alert-danger marg-bottom-0 spacing-top-small" role="alert">
+          <small>{{error | translate}}</small>
+      </div>
+      <div *ngIf="!check.strong" class="alert alert-danger spacing-top-small" role="alert">
+          <b translate>Weak</b>
+      </div>
+      <div *ngIf="check.strong" class="alert alert-success spacing-top-small" role="alert">
+          <b translate>Strong</b>
+      </div>
       <label class="d-block">
           <input type="text" class="form-control " formControlName="rnew_password" autocomplete="Repeat New Password"
               [placeholder]="'Repeat New Password' | translate"/>

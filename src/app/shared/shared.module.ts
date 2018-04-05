@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LoaderComponent } from './loader/loader.component';
+import { LoaderComponent, PasswordTestService} from '@app/shared';
 
 @NgModule({
   imports: [
@@ -12,6 +12,9 @@ import { LoaderComponent } from './loader/loader.component';
   ],
   exports: [
     LoaderComponent
+  ],
+  providers: [
+    PasswordTestService
   ]
 })
 export class SharedModule { }
