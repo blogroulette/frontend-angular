@@ -63,31 +63,31 @@ export class RouletteComponent implements OnInit {
       });
   }
   upvoteComment(comment: Comment){
-    this.rouletteService.upvoteComment({id: comment.commentid})
+    this.rouletteService.upvoteComment({commentid: comment.commentid, messageid: this.message.messageid})
       .subscribe((status: Status) => {
         this.status = status;
-        comment.votes = comment.votes +1;
+        comment.votes = comment.votes*1 +1;
       });
   }
-  protected downvoteComment(comment: Comment){
-    this.rouletteService.downvoteComment({id: comment.commentid})
+  downvoteComment(comment: Comment){
+    this.rouletteService.downvoteComment({id: comment.commentid, messageid: this.message.messageid})
       .subscribe((status: Status) => {
         this.status = status;
-        comment.votes = comment.votes -1;
+        comment.votes = comment.votes*1 -1;
       });
   }
-  protected upvoteMessage(){
+  upvoteMessage(){
     this.rouletteService.upvoteMessage({id: this.message.messageid})
       .subscribe((status: Status) => {
         this.status = status;
-        this.message.votes = this.message.votes +1;
+        this.message.votes = this.message.votes*1 +1;
       });
   }
-  protected downvoteMessage(){
+  downvoteMessage(){
     this.rouletteService.upvoteMessage({id: this.message.messageid})
       .subscribe((status: Status) => {
         this.status = status;
-        this.message.votes = this.message.votes -1;
+        this.message.votes = this.message.votes*1 -1;
       });
   }
 

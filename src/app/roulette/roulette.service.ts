@@ -21,18 +21,18 @@ const routes = {
       text: c.text,
     }
   });},
-  upvote_message: (c: vote_context) => {return ({
+  upvote_message: (c: message_vote_context) => {return ({
     endpoint: "/VoteMessage",
     body: {
       vote: "up",
-      messageid: c.id,
+      messageid: c.messageid,
     }
   });},
-  downvote_message: (c: vote_context) => {return ({
+  downvote_message: (c: message_vote_context) => {return ({
     endpoint: "/VoteMessage",
     body: {
       vote: "down",
-      messageid: c.id,
+      messageid: c.messageid,
     }
   });},
   add_comment: (c: add_comment_context) => {return ({
@@ -42,32 +42,38 @@ const routes = {
       text: c.text,
     }
   });},
-  upvote_comment: (c: vote_context) => {return ({
+  upvote_comment: (c: comment_vote_context) => {return ({
     endpoint: "/VoteComment",
     body: {
       vote: "up",
-      commentid: c.id,
+      commentid: c.commentid,
+      messageid: c.messageid
     }
   });},
-  downvote_comment: (c: vote_context) => {return ({
+  downvote_comment: (c: comment_vote_context) => {return ({
     endpoint: "/VoteComment",
     body: {
       vote: "down",
-      commentid: c.id,
+    commentid: c.commentid,
+    messageid: c.messageid
     }
   });}
 };
 
 export interface add_message_context {
   title: string,
-  text: string,
+  text: string
 }
-export interface vote_context {
-  id: string,
+export interface comment_vote_context {
+  messageid: string,
+  commentid: string
+}
+export interface message_vote_context {
+  messageid: string
 }
 export interface add_comment_context {
   messageid: string,
-  text: string,
+  text: string
 }
 
 @Injectable()
