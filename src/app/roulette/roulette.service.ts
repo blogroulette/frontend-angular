@@ -19,43 +19,43 @@ const routes = {
     body: {
       title: c.title,
       text: c.text,
-    },
+    }
   });},
   upvote_message: (c: vote_context) => {return ({
     endpoint: "/VoteMessage",
     body: {
       vote: "up",
       messageid: c.id,
-    },
+    }
   });},
   downvote_message: (c: vote_context) => {return ({
     endpoint: "/VoteMessage",
     body: {
       vote: "down",
       messageid: c.id,
-    },
+    }
   });},
   add_comment: (c: add_comment_context) => {return ({
     endpoint: "/AddComment",
     body: {
       messageid: c.messageid,
       text: c.text,
-    },
+    }
   });},
   upvote_comment: (c: vote_context) => {return ({
     endpoint: "/VoteComment",
     body: {
       vote: "up",
       commentid: c.id,
-    },
+    }
   });},
   downvote_comment: (c: vote_context) => {return ({
     endpoint: "/VoteComment",
     body: {
       vote: "down",
       commentid: c.id,
-    },
-  });},
+    }
+  });}
 };
 
 export interface add_message_context {
@@ -73,10 +73,13 @@ export interface add_comment_context {
 @Injectable()
 export class RouletteService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+
+  }
 
   getRandomMessage(): Observable<Message> {
     return this.httpClient
+      .authenticate()
       .post<Message>(
         routes.get_message().endpoint, {});
   }
@@ -89,42 +92,37 @@ export class RouletteService {
   }
   addMessage(c: add_message_context): Observable<Status> {
     return this.httpClient
-      .authenticate()
       .post<Status>(
         routes.add_message(c).endpoint,
         routes.add_message(c).body);
   }
   upvoteMessage(c: vote_context): Observable<Status> {
+    console.log("Upvote message");
     return this.httpClient
-      .authenticate()
       .post<Status>(
         routes.upvote_message(c).endpoint,
         routes.upvote_message(c).body);
   }
   downvoteMessage(c: vote_context): Observable<Status> {
     return this.httpClient
-      .authenticate()
       .post<Status>(
         routes.downvote_message(c).endpoint,
         routes.downvote_message(c).body);
   }
   addComment(c: add_comment_context): Observable<Status> {
     return this.httpClient
-      .authenticate()
       .post<Status>(
         routes.add_comment(c).endpoint,
         routes.add_comment(c).body);
   }
   upvoteComment(c: vote_context): Observable<Status> {
     return this.httpClient
-      .authenticate()
       .post<Status>(
         routes.upvote_comment(c).endpoint,
         routes.upvote_comment(c).body);
   }
   downvoteComment(c: vote_context): Observable<Status> {
     return this.httpClient
-      .authenticate()
       .post<Status>(
         routes.downvote_comment(c).endpoint,
         routes.downvote_comment(c).body);

@@ -16,6 +16,7 @@ import { HttpCacheService } from './http/http-cache.service';
 import { ApiPrefixInterceptor } from './http/api-prefix.interceptor';
 import { ErrorHandlerInterceptor } from './http/error-handler.interceptor';
 import { CacheInterceptor } from './http/cache.interceptor';
+import { AuthenticationInterceptor } from '@app/core/http/authentication.interceptor';
 
 @NgModule({
   imports: [
@@ -37,11 +38,8 @@ import { CacheInterceptor } from './http/cache.interceptor';
     ApiPrefixInterceptor,
     ErrorHandlerInterceptor,
     CacheInterceptor,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ApiPrefixInterceptor,
-      multi: true
-    },
+    AuthenticationInterceptor,
+    { provide: HTTP_INTERCEPTORS, useClass: ApiPrefixInterceptor, multi: true },
     {
       provide: HttpClient,
       useClass: HttpService
