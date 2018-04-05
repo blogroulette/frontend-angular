@@ -35,5 +35,10 @@
   "Downvote Comment": "Downvote",
   "Upvote Comment": "Upvote",
   "Load Documentation": "Lade Dokumentation",
-  "Toggle create new message.": "Umschalten zwischen Lesen und neuem Eintrag."
+  "Toggle create new message.": "Umschalten zwischen Lesen und neuem Eintrag.",
+  "Blogroulette Login": "Blogroulette Login",
+  "Blogroulette Settings": "Blogroulette Einstellungen",
+  "Blogroulette": "Blogroulette",
+  "error": "Fehler",
+  "ok": "OK"
 }

@@ -27,5 +27,18 @@
   "Title": "Title",
   "You need to add some text to add a comment.": "You need to add some text to add a comment.",
   "You need to add a title to add a message.": "You need to add a title to add a message.",
-  "You need to add some text to add a message.": "You need to add some text to add a message."
+  "You need to add some text to add a message.": "You need to add some text to add a message.",
+  "Get another random message.": "Zufälligen neuen Eintrag laden.",
+  "Toggle the fileds for a new comment.": "Eingabefelder für neuen Kommentar.",
+  "Downvote Message": "Downvote",
+  "Upvote Message": "Upvote",
+  "Downvote Comment": "Downvote",
+  "Upvote Comment": "Upvote",
+  "Load Documentation": "Lade Dokumentation",
+  "Toggle create new message.": "Umschalten zwischen Lesen und neuem Eintrag.",
+  "Blogroulette Login": "Blogroulette Login",
+  "Blogroulette Settings": "Blogroulette Einstellungen",
+  "Blogroulette": "Blogroulette",
+  "error": "Fehler",
+  "ok": "OK"
 }
