@@ -15,7 +15,6 @@ export interface LoginContext {
   remember?: boolean;
 }
 export interface RegisterContext {
-  invitetoken: string;
   username: string;
   password: string;
 }
@@ -36,7 +35,6 @@ const routes = {
   register: (c: RegisterContext) => {return ({
     endpoint: "/Register",
     body: {
-      invitetoken: c.invitetoken,
       username: c.username,
       password: c.password,
     },

@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       .subscribe(credentials => {
         log.debug(`${credentials.username} successfully logged in`);
         this.router.navigate(['/'], { replaceUrl: true });
-      }, error => {
+      }, (error: string) => {
         log.debug(`Login error: ${error}`);
         this.error = error;
       });
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
 
   register() {
     this.isLoading = true;
-    this.authenticationService.register(this.registerForm.value)
+    this.authenticationService.register( { username: this.registerForm.value.username , password: this.registerForm.value.password } )
       .pipe(finalize(() => {
         this.registerForm.markAsPristine();
         this.isLoading = false;
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       .subscribe(credentials => {
         log.debug(`${credentials.username} successfully logged in`);
         this.router.navigate(['/'], { replaceUrl: true });
-      }, error => {
+      }, (error: string) => {
         log.debug(`Login error: ${error}`);
         this.error = error;
       });
@@ -93,8 +93,11 @@ export class LoginComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      rpassword: ['', Validators.required]
+      rpassword: ['', Validators.required, this.passwordsmatch]
     });
   }
+  passwordsmatch(cg: FormGroup) {
+      return cg.value.password == cg.value.rpassword ? null : cg.value.password ;
+}
 
 }

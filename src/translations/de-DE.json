@@ -44,8 +44,8 @@
   "Weak": "Schwaches Passwort",
   "Strong": "Starkes Passwort",
   "The password must be at least 10 characters long.": "Das Passwort sollte länger als zehn Zeichen sein.",
-  "The password must contain at least one uppercase letter.": "Das Passwort sollte mindestend einen Großbuchstaben enthalten.",
-  "The password must contain at least one number.": "Das Passwort sollte mindestend einen Großbuchstaben enthalten.",
-  "The password must contain at least one special character.": "Das Passwort sollte mindestend einen Großbuchstaben enthalten.",
-  "The password must contain at least one lowercase letter.": "Das Passwort sollte mindestend einen Kleinbuchstaben enthalten."
+  "The password must contain at least one uppercase letter.": "Das Passwort sollte mindestens einen Großbuchstaben enthalten.",
+  "The password must contain at least one number.": "Das Passwort sollte mindestens eine Ziffer enthalten.",
+  "The password must contain at least one special character.": "Das Passwort sollte mindestens ein Sonderzeichen enthalten.",
+  "The password must contain at least one lowercase letter.": "Das Passwort sollte mindestens einen Kleinbuchstaben enthalten."
   }
