@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { Logger, I18nService, AuthenticationService } from '@app/core';
 import { PasswordTestService, Check } from '@app/shared';
+import { of } from 'rxjs/observable/of';
 
 const log = new Logger('Login');
 
@@ -20,19 +21,16 @@ export class LoginComponent implements OnInit {
   error: string;
   loginForm: FormGroup;
   registerForm: FormGroup;
-  isLoading: boolean;
-  register_user: boolean;
+  isLoading= false;
+  register_user= false;
   check: Check;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
               private i18nService: I18nService,
-              private passwordTest: PasswordTestService,
+              private passwordTestService: PasswordTestService,
               private authenticationService: AuthenticationService) {
     this.createForm();
-    this.error = null;
-    this.isLoading = false;
-    this.register_user = false;
   }
 
   ngOnInit() { }
@@ -69,7 +67,7 @@ export class LoginComponent implements OnInit {
       });
   }
   passwordtest(){
-      this.check = this.passwordTest.TestPassword(this.registerForm.value.password);
+      this.check = this.passwordTestService.TestPassword(this.registerForm.value.password);
   }
 
   setLanguage(language: string) {
@@ -97,7 +95,7 @@ export class LoginComponent implements OnInit {
     });
   }
   passwordsmatch(cg: FormGroup) {
-      return cg.value.password == cg.value.rpassword ? null : cg.value.password ;
+      return of (cg.value.password == cg.value.rpassword ? null : cg.value.password);
 }
 
 }

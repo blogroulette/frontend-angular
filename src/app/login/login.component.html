@@ -67,14 +67,16 @@
                     a Password is required
                   </small>
                 </label>
-                <div *ngFor="let error of check.errors" class="alert alert-danger marg-bottom-0 spacing-top-small" role="alert">
-                    <small>{{error | translate}}</small>
-                </div>
-                <div *ngIf="!check.strong" class="alert alert-danger spacing-top-small" role="alert">
-                    <b translate>Weak</b>
-                </div>
-                <div *ngIf="check.strong" class="alert alert-success spacing-top-small" role="alert">
-                    <b translate>Strong</b>
+                <div *ngIf="check">
+                  <div *ngFor="let error of check.errors" class="alert alert-danger marg-bottom-0 spacing-top-small" role="alert">
+                      <small>{{error | translate}}</small>
+                  </div>
+                  <div *ngIf="!check.strong" class="alert alert-danger spacing-top-small" role="alert">
+                      <b translate>Weak</b>
+                  </div>
+                  <div *ngIf="check.strong" class="alert alert-success spacing-top-small" role="alert">
+                      <b translate>Strong</b>
+                  </div>
                 </div>
                 <label class="d-block">
                   <input type="password" class="form-control" formControlName="rpassword" autocomplete="repeat-new-password"
