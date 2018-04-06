@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import owaspPasswordStrengthTest = require('owasp-password-strength-test');
+import * as owaspPasswordStrengthTest from 'owasp-password-strength-test';
 
 @Injectable()
 export class PasswordTestService implements OnInit {

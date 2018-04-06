@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SettingsModule } from './settings/settings.module';
 import { RouletteModule } from './roulette/roulette.module';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { RouletteModule } from './roulette/roulette.module';
     HttpClientModule,
     TranslateModule.forRoot(),
     NgbModule.forRoot(),
+    MarkdownModule.forRoot(),
     CoreModule,
     SharedModule,
     RouletteModule,

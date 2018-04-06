@@ -17,6 +17,7 @@
     <div *ngIf="message" class="card spacing-m-top">
       <div class="spacing-m-all">
         <h2>{{this.message.title}}</h2>
+        <markdown [data]="message.text"></markdown>
         <article class="form-control" aria-label="marg-0 message text area">{{message.text}}</article>
         <div class="spacing-m-top spacing-m-bottom d-flex justify-content-between">
           <div>
