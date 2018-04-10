@@ -20,32 +20,32 @@ export class RouletteComponent implements OnInit {
   addcommentForm: FormGroup;
 
   constructor(private rouletteService: RouletteService,
-              private formBuilder: FormBuilder) {
-                this.createForm();
-                this.write_new_message= false;
-                this.write_new_comment= false;
-                this.isLoading=false;
+    private formBuilder: FormBuilder) {
+    this.createForm();
+    this.write_new_message = false;
+    this.write_new_comment = false;
+    this.isLoading = false;
   }
 
   ngOnInit() {
     this.getMessage();
   }
-  getMessage(){
+  getMessage() {
     this.isLoading = true;
     this.rouletteService.getRandomMessage()
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((message: Message) => { message.comments.reverse(); this.message = message; });
   }
-  getDoc(){
+  getDoc() {
     this.isLoading = true;
     this.rouletteService.getDocumentation()
       .pipe(finalize(() => { this.isLoading = false; }))
-      .subscribe((message: Message) => { message.comments.reverse();this.message = message; });
+      .subscribe((message: Message) => { message.comments.reverse(); this.message = message; });
   }
-  addComment(){
-    if (this.addcommentForm.invalid){this.status={status: "error", error: "Invalid comment format."};return;}
+  addComment() {
+    if (this.addcommentForm.invalid) { this.status = { status: "error", error: "Invalid comment format." }; return; }
     this.isLoading = true;
-    this.rouletteService.addComment({ text: this.addcommentForm.value.text, messageid: this.message.messageid})
+    this.rouletteService.addComment({ text: this.addcommentForm.value.text, messageid: this.message.messageid })
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((status: Status) => {
         this.status = status;
@@ -54,10 +54,10 @@ export class RouletteComponent implements OnInit {
         this.write_new_comment = false;
       });
   }
-  addMessage(){
-    if (this.newmessageForm.invalid){this.status={status: "error", error: "Invalid message format."};return;}
+  addMessage() {
+    if (this.newmessageForm.invalid) { this.status = { status: "error", error: "Invalid message format." }; return; }
     this.isLoading = true;
-    this.rouletteService.addMessage(this.newmessageForm.value)
+    this.rouletteService.addMessage({ title: this.newmessageForm.value.title, text: this.newmessageForm.value.title })
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((status: Status) => {
         this.status = status;
@@ -66,32 +66,32 @@ export class RouletteComponent implements OnInit {
         this.write_new_message = false;
       });
   }
-  upvoteComment(comment: Comment){
-    this.rouletteService.upvoteComment({commentid: comment.commentid, messageid: this.message.messageid})
+  upvoteComment(comment: Comment) {
+    this.rouletteService.upvoteComment({ commentid: comment.commentid, messageid: this.message.messageid })
       .subscribe((status: Status) => {
         this.status = status;
-        comment.votes = comment.votes*1 +1;
+        comment.votes = comment.votes * 1 + 1;
       });
   }
-  downvoteComment(comment: Comment){
-    this.rouletteService.downvoteComment({commentid: comment.commentid, messageid: this.message.messageid})
+  downvoteComment(comment: Comment) {
+    this.rouletteService.downvoteComment({ commentid: comment.commentid, messageid: this.message.messageid })
       .subscribe((status: Status) => {
         this.status = status;
-        comment.votes = comment.votes*1 -1;
+        comment.votes = comment.votes * 1 - 1;
       });
   }
-  upvoteMessage(){
-    this.rouletteService.upvoteMessage({messageid: this.message.messageid})
+  upvoteMessage() {
+    this.rouletteService.upvoteMessage({ messageid: this.message.messageid })
       .subscribe((status: Status) => {
         this.status = status;
-        this.message.votes = this.message.votes*1 +1;
+        this.message.votes = this.message.votes * 1 + 1;
       });
   }
-  downvoteMessage(){
-    this.rouletteService.downvoteMessage({messageid: this.message.messageid})
+  downvoteMessage() {
+    this.rouletteService.downvoteMessage({ messageid: this.message.messageid })
       .subscribe((status: Status) => {
         this.status = status;
-        this.message.votes = this.message.votes*1 -1;
+        this.message.votes = this.message.votes * 1 - 1;
       });
   }
 
@@ -103,6 +103,6 @@ export class RouletteComponent implements OnInit {
     this.addcommentForm = this.formBuilder.group({
       text: ['', Validators.required]
     });
-    }
+  }
 
 }

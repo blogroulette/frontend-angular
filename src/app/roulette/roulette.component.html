@@ -1,81 +1,76 @@
 <div class="container">
   <div class="text-center">
-    <div *ngIf="status && status.status != 'ok'" class="alert alert-danger spacing-m-top" role="alert" (click)="status = null;"
-          translate>
-          <b>{{status.status | translate}}</b><small *ngIf="status.error"> {{status.error | translate}}</small>
+    <div *ngIf="status && status.status != 'ok'" class="alert alert-danger spacing-m-top" role="alert" (click)="status = null;" translate>
+      <b>{{status.status | translate}}</b><small *ngIf="status.error"> {{status.error | translate}}</small>
     </div>
-    <div *ngIf="status && status.status == 'ok'" class="alert alert-success spacing-m-top" role="alert" (click)="status = null;"
-          translate>
-          <b>{{status.status | translate}}</b><small *ngIf="status.error"> {{status.error | translate}}</small>
+    <div *ngIf="status && status.status == 'ok'" class="alert alert-success spacing-m-top" role="alert" (click)="status = null;" translate>
+      <b>{{status.status | translate}}</b><small *ngIf="status.error"> {{status.error | translate}}</small>
     </div>
-    <button id="other-message" type="button" class="btn btn-outline-primary spacing-m-top" (click)="getMessage(); write_new_message = false;" data-toggle="tooltip"
-    data-placement="top" title="'Get another random message.' | translate">
+    <button id="other-message" type="button" class="btn btn-outline-primary spacing-m-top" (click)="getMessage(); write_new_message = false;" data-toggle="tooltip" data-placement="top" title="'Get another random message.' | translate">
     <img class="image-icon fa-spin fa-3x rounded-circle" src="assets/logo.png" alt="load other message"></button>
   </div>
   <app-loader [isLoading]="isLoading"></app-loader>
-  <div *ngIf="!write_new_message" >
+  <div *ngIf="!write_new_message">
     <div *ngIf="message" class="card spacing-m-top">
       <div class="spacing-m-all">
         <h2>{{this.message.title}}</h2>
         <markdown [data]="message.text"></markdown>
-        <article class="form-control" aria-label="marg-0 message text area">{{message.text}}</article>
         <div class="spacing-m-top spacing-m-bottom d-flex justify-content-between">
           <div>
             <span class="btn">{{message.votes}}</span>
-            <button type="button" class="btn buttn btn-primary" (click)="upvoteMessage();" [disabled]="!message || isLoading"
-                data-toggle="tooltip" data-placement="top" title="'Upvote Message' | translate">
+            <button type="button" class="btn buttn btn-primary" (click)="upvoteMessage();" [disabled]="!message || isLoading" data-toggle="tooltip" data-placement="top" title="'Upvote Message' | translate">
                 <i class="far fa-thumbs-up"></i></button>
-            <button type="button" class="btn buttn btn-primary" (click)="downvoteMessage();" [disabled]="!message || isLoading"
-                data-toggle="tooltip" data-placement="top" title="'Downvote Message' | translate">
+            <button type="button" class="btn buttn btn-primary" (click)="downvoteMessage();" [disabled]="!message || isLoading" data-toggle="tooltip" data-placement="top" title="'Downvote Message' | translate">
                 <i class="far fa-thumbs-down"></i></button>
           </div>
-          <button type="button" class="btn btn-primary" (click)="write_new_comment = !write_new_comment;" [disabled]="!message || isLoading"
-                data-toggle="tooltip" data-placement="top" title="'Toggle the fileds for a new comment.' | translate"
-                translate>Add Comment</button>
+          <button type="button" class="btn btn-primary" (click)="write_new_comment = !write_new_comment;" [disabled]="!message || isLoading" data-toggle="tooltip" data-placement="top" title="'Toggle the fileds for a new comment.' | translate" translate>Add Comment</button>
         </div>
       </div>
     </div>
 
     <div *ngIf="write_new_comment" class="spacing-m-top d-flex justify-content-between">
-          <div class="d-flex flex-column comment w-6">
-          </div>
-          <form (ngSubmit)="addComment()" [formGroup]="addcommentForm" class="container-fluid marg-0 padd-0" novalidate>
-            <div class="form-group">
-              <label class="d-block">
+      <div class="d-flex flex-column comment w-6">
+      </div>
+      <form (ngSubmit)="addComment()" [formGroup]="addcommentForm" class="container-fluid marg-0 padd-0" novalidate>
+        <div class="form-group">
+          <label class="d-block">
+                <div>
+                  <p translate>Preview</p>
+                  <article><markdown [data]="addcommentForm.controls.text"></markdown></article>
+                  <p translate>Editor</p>
                   <textarea class="form-control" formControlName="text" autocomplete="" aria-label="new Comment text area" rows="9"></textarea>
+                </div>
                   <div class="alert alert-danger spacing-m-top" role="alert" [hidden]="addcommentForm.controls.text.valid || addcommentForm.controls.text.untouched">
                       <small translate>You need to add some text to add a comment.</small>
                   </div>
               </label>
-              <div class="clearfix spacing-m-top">
-                  <button type="submit" name="button" class="btn btn-success float-right" [disabled]="addcommentForm.invalid || isLoading" translate>Submit</button>
-              </div>
-              </div>
-         </form>
+          <div class="clearfix spacing-m-top">
+            <button type="submit" name="button" class="btn btn-success float-right" [disabled]="addcommentForm.invalid || isLoading" translate>Submit</button>
+          </div>
+        </div>
+      </form>
     </div>
 
     <div *ngIf="message">
       <div *ngFor="let comment of message.comments" class="spacing-m-all d-flex justify-content-between">
-          <div class="d-flex flex-column comment w-6">
-            <span class="btn">{{comment.votes}}</span>
-            <button type="button" class="btn buttn btn-primary" (click)="upvoteComment(comment);" [disabled]="!comment.commentid || isLoading"
-                data-toggle="tooltip" data-placement="top" title="'Upvote Comment' | translate">
+        <div class="d-flex flex-column comment w-6">
+          <span class="btn">{{comment.votes}}</span>
+          <button type="button" class="btn buttn btn-primary" (click)="upvoteComment(comment);" [disabled]="!comment.commentid || isLoading" data-toggle="tooltip" data-placement="top" title="'Upvote Comment' | translate">
                 <i class="far fa-thumbs-up"></i></button>
-            <button type="button" class="btn buttn btn-primary" (click)="downvoteComment(comment);" [disabled]="!comment.commentid || isLoading"
-                data-toggle="tooltip" data-placement="top" title="'Downvote Comment' | translate">
+          <button type="button" class="btn buttn btn-primary" (click)="downvoteComment(comment);" [disabled]="!comment.commentid || isLoading" data-toggle="tooltip" data-placement="top" title="'Downvote Comment' | translate">
                 <i class="far fa-thumbs-down"></i></button>
-          </div>
-            <article class="form-control" aria-label="comment text area">{{comment.text}}</article>
         </div>
+        <markdown [data]="comment.text"></markdown>
+      </div>
     </div>
 
   </div>
 
   <div *ngIf="write_new_message" class="card spacing-m-top">
     <form (ngSubmit)="addMessage()" [formGroup]="newmessageForm" novalidate>
-        <div class="spacing-m-all d-flex flex-column marg-0  justify-content-between">
-          <div class="form-group spacing-m-all">
-            <label class="d-block">
+      <div class="spacing-m-all d-flex flex-column marg-0  justify-content-between">
+        <div class="form-group spacing-m-all">
+          <label class="d-block">
           <input type="text" class="form-control " formControlName="title" autocomplete="title"
                  [placeholder]="'Title' | translate"/>
           <div class="alert alert-danger spacing-m-top" role="alert" [hidden]="newmessageForm.controls.title.valid || newmessageForm.controls.title.untouched">
@@ -83,26 +78,27 @@
           </div>
           </label>
           <label class="d-block">
-          <textarea class="form-control" formControlName="text" autocomplete="" aria-label="new message text area" rows="9"></textarea>
+            <div class="row">
+              <textarea class="col-md-6 form-control" formControlName="text" autocomplete="" aria-label="new message text area" rows="9"></textarea>
+              <article class="col-md-6"><markdown [data]="addcommentForm.controls.text"></markdown></article>
+            </div>
           <div class="alert alert-danger spacing-m-top" role="alert" [hidden]="newmessageForm.controls.text.valid || newmessageForm.controls.text.untouched">
                 <small translate>You need to add some text to add a message.</small>
           </div>
           </label>
           <div class="spacing-m-bottom clearfix container-fluid padd-0">
-              <button type="submit" name="button" class="btn btn-success float-right" [disabled]="newmessageForm.invalid || isLoading" translate>Submit</button>
+            <button type="submit" name="button" class="btn btn-success float-right" [disabled]="newmessageForm.invalid || isLoading" translate>Submit</button>
           </div>
         </div>
-        </div>
+      </div>
     </form>
   </div>
 
 </div>
-<button id="add-message" type="button" class="btn buttn btn-outline-primary" (click)="write_new_message = !write_new_message;"
-    data-toggle="tooltip" data-placement="left" title="'Toggle create new message.' | translate">
+<button id="add-message" type="button" class="btn buttn btn-outline-primary" (click)="write_new_message = !write_new_message;" data-toggle="tooltip" data-placement="left" title="'Toggle create new message.' | translate">
     <i *ngIf="!write_new_message" class="fas fa-plus"></i>
     <i *ngIf="write_new_message" class="fas fa-undo"></i>
 </button>
-<button id="show-docs" type="button" class="btn buttn btn-outline-primary" (click)="getDoc();"
-    data-toggle="tooltip" data-placement="left" title="'Load Documentation' | translate">
+<button id="show-docs" type="button" class="btn buttn btn-outline-primary" (click)="getDoc();" data-toggle="tooltip" data-placement="left" title="'Load Documentation' | translate">
     <i class="fas fa-book"></i>
 </button>
