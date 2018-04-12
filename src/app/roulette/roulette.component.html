@@ -7,7 +7,7 @@
       <b>{{status.status | translate}}</b><small *ngIf="status.error"> {{status.error | translate}}</small>
     </div>
     <button id="other-message" type="button" class="btn btn-outline-primary spacing-m-top" (click)="getMessage(); write_new_message = false;" data-toggle="tooltip" data-placement="top" title="'Get another random message.' | translate">
-    <img class="image-icon fa-spin fa-3x rounded-circle" src="assets/logo.png" alt="load other message"></button>
+    <img class="image-icon fa-spin fa-3x rounded-circle" src="assets/logo.png" alt="load other message" /></button>
   </div>
   <app-loader [isLoading]="isLoading"></app-loader>
   <div *ngIf="!write_new_message">
