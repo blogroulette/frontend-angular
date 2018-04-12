@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './roulette.component.html',
   styleUrls: ['./roulette.component.scss']
 })
+
 export class RouletteComponent implements OnInit {
 
   message: Message;
@@ -43,7 +44,7 @@ export class RouletteComponent implements OnInit {
       .subscribe((message: Message) => { message.comments.reverse(); this.message = message; });
   }
   addComment() {
-    if (this.addcommentForm.invalid) { this.status = { status: "error", error: "Invalid comment format." }; return; }
+    if (this.addcommentForm.invalid) { this.status = { status: 'error', error: 'Invalid comment format.' }; return; }
     this.isLoading = true;
     this.rouletteService.addComment({ text: this.addcommentForm.value.text, messageid: this.message.messageid })
       .pipe(finalize(() => { this.isLoading = false; }))
@@ -55,7 +56,7 @@ export class RouletteComponent implements OnInit {
       });
   }
   addMessage() {
-    if (this.newmessageForm.invalid) { this.status = { status: "error", error: "Invalid message format." }; return; }
+    if (this.newmessageForm.invalid) { this.status = { status: 'error', error: 'Invalid message format.' }; return; }
     this.isLoading = true;
     this.rouletteService.addMessage({ title: this.newmessageForm.value.title, text: this.newmessageForm.value.title })
       .pipe(finalize(() => { this.isLoading = false; }))

@@ -5,7 +5,7 @@ import { CoreModule, HttpCacheService } from '@app/core';
 import { RouletteService } from './roulette.service';
 
 describe('RouletteService', () => {
-  let rouletteService: RouletteService;
+  const rouletteService: RouletteService;
   let httpMock: HttpTestingController;
 
   beforeEach(async(() => {

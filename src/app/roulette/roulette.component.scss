@@ -1,34 +1,44 @@
 .spacing-all {
-  padding: .5em .5em 0 .5em;
+  padding: 0.5em 0.5em 0 0.5em;
 }
+
 .spacing-m-all {
-  margin: .5em .5em 0 .5em;
+  margin: 0.5em 0.5em 0 0.5em;
 }
+
 .spacing-all-v {
-  padding: 0 .5em 0 .5em;
+  padding: 0 0.5em 0 0.5em;
 }
+
 .spacing-all-x {
-  padding: .5em 0 .5em 0;
+  padding: 0.5em 0 0.5em 0;
 }
+
 .spacing-m-top {
   margin-top: 1em;
 }
+
 .spacing-m-bottom {
   margin-bottom: 1em;
 }
-article  {
+
+article {
   min-height: 6rem;
 }
+
 .comment {
   margin-left: 1em;
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
-.buttn {
-  margin: .3em;
+
+.header-button {
+  margin: 0.3em;
 }
-.w-6{
+
+.w-6 {
   width: 6em;
 }
+
 .image-icon {
   height: calc(1.4rem * 2);
   transform: rotate(360deg);
@@ -37,16 +47,19 @@ article  {
 #add-message {
   position: fixed;
   top: 4em;
-  right: .5em;
+  right: 0.5em;
 }
+
 #show-docs {
   position: fixed;
-  bottom: .5em;
-  right: .5em;
+  bottom: 0.5em;
+  right: 0.5em;
 }
+
 .marg-0 {
   margin: 0;
 }
+
 .padd-0 {
-padding: 0;
+  padding: 0;
 }

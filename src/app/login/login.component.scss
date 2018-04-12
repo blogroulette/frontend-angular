@@ -2,20 +2,25 @@
 @import "~bootstrap/scss/mixins/_breakpoints";
 
 .background {
-  background-color: #42A5F5;
+  background-color: #42a5f5;
 }
+
 .spacing-top-small {
-  margin-top: .2em;
+  margin-top: 0.2em;
 }
+
 .marg-0 {
   margin: 0;
 }
+
 .padd-0 {
-padding: 0;
+  padding: 0;
 }
+
 .marg-bottom-0 {
   margin-bottom: 0;
 }
+
 .login-wrapper {
   position: absolute;
   top: 0;
@@ -23,12 +28,14 @@ padding: 0;
   left: 0;
   right: 0;
 }
+
 .login-container {
   position: absolute;
   top: 4em;
   left: 0;
   right: 0;
 }
+
 .version {
   margin: 1em;
 }

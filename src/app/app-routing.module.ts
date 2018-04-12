@@ -4,7 +4,7 @@ import { Route } from '@app/core';
 
 const routes: Routes = [
   Route.withShell([
-    //{ path: 'about', loadChildren: 'app/about/about.module#AboutModule' }
+    // { path: 'about', loadChildren: 'app/about/about.module#AboutModule' }
     { path: 'roulette', loadChildren: 'app/roulette/roulette.module#RouletteModule' },
     { path: 'settings', loadChildren: 'app/roulette/roulette.module#RouletteModule' }
   ]),

@@ -16,12 +16,12 @@
           </div>
         </div>
         <div class="nav-item">
-          <button type="button" class="btn buttn btn-outline-primary" [routerLink]="[isSettings ? '/roulette' : '/settings']" (click)="this.isSettings = !this.isSettings;"
-            data-toggle="tooltip" data-placement="left" title="'Toggle create new message.' | translate">
+          <button type="button" class="btn header-button btn-outline-primary" [routerLink]="[isSettings ? '/roulette' : '/settings']" (click)="this.isSettings = !this.isSettings;"
+                  data-toggle="tooltip" data-placement="left" title="'Toggle create new message.' | translate">
             <i *ngIf="!isSettings" class="fas fa-wrench"></i>
             <i *ngIf="isSettings" class="fas fa-comment"></i>
         </button>
-            <button class="btn buttn btn-outline-primary" (click)="logout()"><i class="fas fa-sign-out-alt"></i></button>
+            <button class="btn header-button btn-outline-primary" (click)="logout()"><i class="fas fa-sign-out-alt"></i></button>
         </div>
       </div>
     </div>

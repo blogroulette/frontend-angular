@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
   error: string;
   loginForm: FormGroup;
   registerForm: FormGroup;
-  isLoading= false;
-  register_user= false;
+  isLoading = false;
+  register_user = false;
   check: Check;
 
   constructor(private router: Router,
@@ -53,7 +53,10 @@ export class LoginComponent implements OnInit {
 
   register() {
     this.isLoading = true;
-    this.authenticationService.register( { username: this.registerForm.value.username , password: this.registerForm.value.password } )
+    this.authenticationService.register( {
+      username: this.registerForm.value.username,
+      password: this.registerForm.value.password
+    } )
       .pipe(finalize(() => {
         this.registerForm.markAsPristine();
         this.isLoading = false;
@@ -66,7 +69,7 @@ export class LoginComponent implements OnInit {
         this.error = error;
       });
   }
-  passwordtest(){
+  passwordtest() {
       this.check = this.passwordTestService.TestPassword(this.registerForm.value.password);
   }
 
@@ -95,7 +98,7 @@ export class LoginComponent implements OnInit {
     });
   }
   passwordsmatch(cg: FormGroup) {
-      return of (cg.value.password == cg.value.rpassword ? null : cg.value.password);
+      return of (cg.value.password === cg.value.rpassword ? null : cg.value.password);
 }
 
 }
