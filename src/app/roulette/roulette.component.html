@@ -18,9 +18,9 @@
         <div class="spacing-m-top spacing-m-bottom d-flex justify-content-between">
           <div>
             <span class="btn">{{message.votes}}</span>
-            <button type="button" class="btn buttn btn-primary" (click)="upvoteMessage();" [disabled]="!message || isLoading" data-toggle="tooltip" data-placement="top" title="'Upvote Message' | translate">
+            <button type="button" class="btn header-button btn-primary" (click)="upvoteMessage();" [disabled]="!message || isLoading" data-toggle="tooltip" data-placement="top" title="'Upvote Message' | translate">
                 <i class="far fa-thumbs-up"></i></button>
-            <button type="button" class="btn buttn btn-primary" (click)="downvoteMessage();" [disabled]="!message || isLoading" data-toggle="tooltip" data-placement="top" title="'Downvote Message' | translate">
+            <button type="button" class="btn header-button btn-primary" (click)="downvoteMessage();" [disabled]="!message || isLoading" data-toggle="tooltip" data-placement="top" title="'Downvote Message' | translate">
                 <i class="far fa-thumbs-down"></i></button>
           </div>
           <button type="button" class="btn btn-primary" (click)="write_new_comment = !write_new_comment;" [disabled]="!message || isLoading" data-toggle="tooltip" data-placement="top" title="'Toggle the fileds for a new comment.' | translate" translate>Add Comment</button>
@@ -55,9 +55,9 @@
       <div *ngFor="let comment of message.comments" class="spacing-m-all d-flex justify-content-between">
         <div class="d-flex flex-column comment w-6">
           <span class="btn">{{comment.votes}}</span>
-          <button type="button" class="btn buttn btn-primary" (click)="upvoteComment(comment);" [disabled]="!comment.commentid || isLoading" data-toggle="tooltip" data-placement="top" title="'Upvote Comment' | translate">
+          <button type="button" class="btn header-button btn-primary" (click)="upvoteComment(comment);" [disabled]="!comment.commentid || isLoading" data-toggle="tooltip" data-placement="top" title="'Upvote Comment' | translate">
                 <i class="far fa-thumbs-up"></i></button>
-          <button type="button" class="btn buttn btn-primary" (click)="downvoteComment(comment);" [disabled]="!comment.commentid || isLoading" data-toggle="tooltip" data-placement="top" title="'Downvote Comment' | translate">
+          <button type="button" class="btn header-button btn-primary" (click)="downvoteComment(comment);" [disabled]="!comment.commentid || isLoading" data-toggle="tooltip" data-placement="top" title="'Downvote Comment' | translate">
                 <i class="far fa-thumbs-down"></i></button>
         </div>
         <markdown [data]="comment.text"></markdown>
@@ -95,10 +95,10 @@
   </div>
 
 </div>
-<button id="add-message" type="button" class="btn buttn btn-outline-primary" (click)="write_new_message = !write_new_message;" data-toggle="tooltip" data-placement="left" title="'Toggle create new message.' | translate">
+<button id="add-message" type="button" class="btn header-button btn-outline-primary" (click)="write_new_message = !write_new_message;" data-toggle="tooltip" data-placement="left" title="'Toggle create new message.' | translate">
     <i *ngIf="!write_new_message" class="fas fa-plus"></i>
     <i *ngIf="write_new_message" class="fas fa-undo"></i>
 </button>
-<button id="show-docs" type="button" class="btn buttn btn-outline-primary" (click)="getDoc();" data-toggle="tooltip" data-placement="left" title="'Load Documentation' | translate">
+<button id="show-docs" type="button" class="btn header-button btn-outline-primary" (click)="getDoc();" data-toggle="tooltip" data-placement="left" title="'Load Documentation' | translate">
     <i class="fas fa-book"></i>
 </button>
