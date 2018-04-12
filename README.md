@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/blogroulette/frontend-angular.svg?branch=master)](https://travis-ci.org/blogroulette/frontend-angular)
+
 # blogroulette web ui
 
 This is the graphical userinterface for the Blogroulette project.
