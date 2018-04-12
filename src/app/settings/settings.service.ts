@@ -6,22 +6,22 @@ import { map, catchError } from 'rxjs/operators';
 
 const routes = {
   load_settings: () => {return ({
-    endpoint: "/LoadSettings",
-  });},
+    endpoint: '/LoadSettings',
+  }); },
   save_settings: (c: save_settings_context) => {return ({
-    endpoint: "/SaveSettings",
+    endpoint: '/SaveSettings',
     body: {
       username: c.username,
       password: c.password,
       newpassword: c.newpassword,
     },
-  });},
+  }); },
 };
 
 export interface save_settings_context {
-  username: string,
-  password: string,
-  newpassword: string,
+  username: string;
+  password: string;
+  newpassword: string;
 }
 
 @Injectable()

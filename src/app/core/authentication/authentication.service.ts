@@ -26,23 +26,23 @@ export interface Status {
 
 const routes = {
   login: (c: LoginContext) => {return ({
-    endpoint: "/Login",
+    endpoint: '/Login',
     body: {
       username: c.username,
       password: c.password,
     },
-  });},
+  }); },
   register: (c: RegisterContext) => {return ({
-    endpoint: "/Register",
+    endpoint: '/Register',
     body: {
       username: c.username,
       password: c.password,
     },
-  });},
+  }); },
   logout: () => {return ({
-    endpoint: "/Logout",
-  });},
-}
+    endpoint: '/Logout',
+  }); },
+};
 
 const credentialsKey = 'credentials';
 
@@ -68,7 +68,7 @@ export class AuthenticationService {
    * @return {Observable<Credentials>} The user credentials.
    */
   login(c: LoginContext): Observable<Credentials> {
-    var obs = this.httpClient
+    const obs = this.httpClient
       .post<Credentials>(
         routes.login(c).endpoint,
         routes.login(c).body);
@@ -84,7 +84,7 @@ export class AuthenticationService {
    * @return {Observable<Credentials>} The user credentials.
    */
   register(c: RegisterContext): Observable<Credentials> {
-    var obs = this.httpClient
+    const obs = this.httpClient
       .post<Credentials>(
         routes.register(c).endpoint,
         routes.register(c).body);
@@ -99,12 +99,12 @@ export class AuthenticationService {
    * @return {Observable<boolean>} True if the user was logged out successfully.
    */
   logout(): Observable<Status> {
-    var obs = this.httpClient
+    const obs = this.httpClient
       .authenticate()
       .post<Status>(
         routes.logout().endpoint, {});
     this.setCredentials();
-    const st = {status: "logoff"}
+    const st = {status: 'logoff'};
     return of(st);
   }
 

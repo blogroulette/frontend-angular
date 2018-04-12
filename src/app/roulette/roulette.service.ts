@@ -6,74 +6,77 @@ import { map, catchError } from 'rxjs/operators';
 
 const routes = {
   get_message: () => {return ({
-    endpoint: "/GetMessage",
-  });},
+    endpoint: '/GetMessage',
+  }); },
   get_documentation: () => {return ({
-    endpoint: "/GetMessage",
+    endpoint: '/GetMessage',
     body: {
       messageid: 0,
     }
-  });},
+  }); },
   add_message: (c: add_message_context) => {return ({
-    endpoint: "/AddMessage",
+    endpoint: '/AddMessage',
     body: {
       title: c.title,
       text: c.text,
     }
-  });},
+  }); },
   upvote_message: (c: message_vote_context) => {return ({
-    endpoint: "/VoteMessage",
+    endpoint: '/VoteMessage',
     body: {
-      vote: "up",
+      vote: 'up',
       messageid: c.messageid,
     }
-  });},
+  }); },
   downvote_message: (c: message_vote_context) => {return ({
-    endpoint: "/VoteMessage",
+    endpoint: '/VoteMessage',
     body: {
-      vote: "down",
+      vote: 'down',
       messageid: c.messageid,
     }
-  });},
+  }); },
   add_comment: (c: add_comment_context) => {return ({
-    endpoint: "/AddComment",
+    endpoint: '/AddComment',
     body: {
       messageid: c.messageid,
       text: c.text,
     }
-  });},
+  }); },
   upvote_comment: (c: comment_vote_context) => {return ({
-    endpoint: "/VoteComment",
+    endpoint: '/VoteComment',
     body: {
-      vote: "up",
+      vote: 'up',
       commentid: c.commentid,
       messageid: c.messageid
     }
-  });},
+  }); },
   downvote_comment: (c: comment_vote_context) => {return ({
-    endpoint: "/VoteComment",
+    endpoint: '/VoteComment',
     body: {
-      vote: "down",
+      vote: 'down',
     commentid: c.commentid,
     messageid: c.messageid
     }
-  });}
+  }); }
 };
 
 export interface add_message_context {
-  title: string,
-  text: string
+  title: string;
+  text: string;
 }
+
 export interface comment_vote_context {
-  messageid: string,
-  commentid: string
+  messageid: string;
+  commentid: string;
 }
+
 export interface message_vote_context {
-  messageid: string
+  messageid: string;
 }
+
 export interface add_comment_context {
-  messageid: string,
-  text: string
+  messageid: string;
+  text: string;
 }
 
 @Injectable()
@@ -143,6 +146,7 @@ export interface Status {
   status: string;
   error?: string;
 }
+
 export interface Message {
   messageid: string;
   timestamp: string;
@@ -151,9 +155,10 @@ export interface Message {
   votes: number;
   comments?: Comment[];
 }
+
 export interface Comment {
-  commentid?: string,
-  timestamp?: string,
-  text: string,
-  votes: number,
+  commentid?: string;
+  timestamp?: string;
+  text: string;
+  votes: number;
 }

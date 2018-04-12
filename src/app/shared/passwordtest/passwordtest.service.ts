@@ -15,13 +15,13 @@ checker = owaspPasswordStrengthTest;
 
 }
 
-export type Check = {
-  errors              : string[];
-  failedTests         : number[];
-  requiredTestErrors  : string[];
-  optionalTestErrors  : string[];
-  passedTests         : number[];
-  isPassphrase        : boolean;
-  strong              : boolean;
-  optionalTestsPassed : number;
+export interface Check {
+  errors:             string[];
+  failedTests:        number[];
+  requiredTestErrors: string[];
+  optionalTestErrors: string[];
+  passedTests:        number[];
+  isPassphrase:       boolean;
+  strong:             boolean;
+  optionalTestsPassed: number;
 }

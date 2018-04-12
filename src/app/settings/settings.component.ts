@@ -31,13 +31,13 @@ export class SettingsComponent implements OnInit {
       .pipe(finalize(() => { this.Settings_isLoading = false; }))
       .subscribe((settings: Settings) => { this.settings = settings; });
   }
-  saveSettings(){
+  saveSettings() {
     this.Settings_isLoading = true;
     this.settingsService.saveSettings(this.savesettingsForm.value)
       .pipe(finalize(() => { this.Settings_isLoading = false; }))
-      .subscribe((status: Status) => { this.status = status;});
+      .subscribe((status: Status) => { this.status = status; });
   }
-  passwordtest(){
+  passwordtest() {
       this.check = this.passwordTest.TestPassword(this.savesettingsForm.value.password);
   }
   private createForm() {
