@@ -1,7 +1,7 @@
 # blogroulette web ui
 
-This project was generated with [ngX-Rocket](https://github.com/ngx-rocket/generator-ngx-rocket/)
-version 4.1.0
+This is the graphical userinterface for the Blogroulette project.
+It is desired to get a web app (using Angular), a native app ( using Electron) and a mobile app (using Cordova) with mostly the same code.
 
 # Getting started
 
@@ -24,25 +24,20 @@ Task                            | Description
 `npm start`                     | Run development server on `http://localhost:4200/`
 `npm run serve:sw`              | Run test server on `http://localhost:4w200/` with service worker enabled
 `npm run build [-- --env=prod]` | Lint code and build web app for production (with [AOT](https://angular.io/guide/aot-compiler)) in `www/` folder
-	 			|
 `npm run electron`		| To start a live Electron Container
 `npm run electron:build`	| To start the compile process and a live Electron Container
 `npm run electron-package:linux64` | To build the Angular App and create a linux Package ([electron-packager](https://github.com/electron-userland/electron-packager))
-`npm run electron-install:rpm64` | native RPM-Installer (rpm-build required)([electron-installer-redhat](https://github.com/unindented/electron-installer-redhat))
-`npm run electron-install:deb64` | native DEB-Installer (fakeroot required)([electron-installer-debian](https://github.com/unindented/electron-installer-debian))
- 				|
+`npm run electron-install:rpm64` | native RPM-Installer (`rpm-build` required)([electron-installer-redhat](https://github.com/unindented/electron-installer-redhat))
+`npm run electron-install:deb64` | native DEB-Installer (`fakeroot` required)([electron-installer-debian](https://github.com/unindented/electron-installer-debian))
 `npm run cordova:prepare`       | Prepare for building mobile app (restore Cordova platforms and plugins)
 `npm run cordova:run <ios/android> [--device]` | Run app on target platform device or simulator
 `npm run cordova:build [-- --env=prod]`        | Build mobile app for production in `dist/` folder
 `npm run cordova:clean`         | Removes `www/`, `platforms/` and `plugins/` folders
- 				|
 `npm test`                      | Run unit tests via [Karma](https://karma-runner.github.io) in watch mode
 `npm run test:ci`               | Lint code and run unit tests once for continuous integration
 `npm run e2e`                   | Run e2e tests using [Protractor](http://www.protractortest.org)
 `npm run lint`                  | Lint code
- 				|
 `npm run translations:extract`  | Extract strings from code and templates to `src/app/translations/template.json`
- 				|
 `npm run docs`                  | Display project documentation
 
 When building the application, you can specify the target environment using the additional flag `--env <name>` (do not
@@ -84,3 +79,6 @@ The default build environment is `prod`.
 - [Updating dependencies and tools](docs/updating.md)
 - [Using a backend proxy for development](docs/backend-proxy.md)
 - [Browser routing](docs/routing.md)
+
+This project was generated with [ngX-Rocket](https://github.com/ngx-rocket/generator-ngx-rocket/)
+version 4.1.0
