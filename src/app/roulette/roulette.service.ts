@@ -14,35 +14,35 @@ const routes = {
       messageid: 0,
     }
   }); },
-  add_message: (c: add_message_context) => {return ({
+  add_message: (c: AddMessageContext) => {return ({
     endpoint: '/AddMessage',
     body: {
       title: c.title,
       text: c.text,
     }
   }); },
-  upvote_message: (c: message_vote_context) => {return ({
+  upvote_message: (c: MessageVoteContext) => {return ({
     endpoint: '/VoteMessage',
     body: {
       vote: 'up',
       messageid: c.messageid,
     }
   }); },
-  downvote_message: (c: message_vote_context) => {return ({
+  downvote_message: (c: MessageVoteContext) => {return ({
     endpoint: '/VoteMessage',
     body: {
       vote: 'down',
       messageid: c.messageid,
     }
   }); },
-  add_comment: (c: add_comment_context) => {return ({
+  add_comment: (c: AddCommentContext) => {return ({
     endpoint: '/AddComment',
     body: {
       messageid: c.messageid,
       text: c.text,
     }
   }); },
-  upvote_comment: (c: comment_vote_context) => {return ({
+  upvote_comment: (c: CommentVoteContext) => {return ({
     endpoint: '/VoteComment',
     body: {
       vote: 'up',
@@ -50,7 +50,7 @@ const routes = {
       messageid: c.messageid
     }
   }); },
-  downvote_comment: (c: comment_vote_context) => {return ({
+  downvote_comment: (c: CommentVoteContext) => {return ({
     endpoint: '/VoteComment',
     body: {
       vote: 'down',
@@ -60,21 +60,21 @@ const routes = {
   }); }
 };
 
-export interface add_message_context {
+export interface AddMessageContext {
   title: string;
   text: string;
 }
 
-export interface comment_vote_context {
+export interface CommentVoteContext {
   messageid: string;
   commentid: string;
 }
 
-export interface message_vote_context {
+export interface MessageVoteContext {
   messageid: string;
 }
 
-export interface add_comment_context {
+export interface AddCommentContext {
   messageid: string;
   text: string;
 }
@@ -98,42 +98,42 @@ export class RouletteService {
         routes.get_documentation().endpoint,
         routes.get_documentation().body);
   }
-  addMessage(c: add_message_context): Observable<Status> {
+  addMessage(c: AddMessageContext): Observable<Status> {
     return this.httpClient
     .authenticate()
       .post<Status>(
         routes.add_message(c).endpoint,
         routes.add_message(c).body);
   }
-  upvoteMessage(c: message_vote_context): Observable<Status> {
+  upvoteMessage(c: MessageVoteContext): Observable<Status> {
     return this.httpClient
     .authenticate()
       .post<Status>(
         routes.upvote_message(c).endpoint,
         routes.upvote_message(c).body);
   }
-  downvoteMessage(c: message_vote_context): Observable<Status> {
+  downvoteMessage(c: MessageVoteContext): Observable<Status> {
     return this.httpClient
     .authenticate()
       .post<Status>(
         routes.downvote_message(c).endpoint,
         routes.downvote_message(c).body);
   }
-  addComment(c: add_comment_context): Observable<Status> {
+  addComment(c: AddCommentContext): Observable<Status> {
     return this.httpClient
     .authenticate()
       .post<Status>(
         routes.add_comment(c).endpoint,
         routes.add_comment(c).body);
   }
-  upvoteComment(c: comment_vote_context): Observable<Status> {
+  upvoteComment(c: CommentVoteContext): Observable<Status> {
     return this.httpClient
     .authenticate()
       .post<Status>(
         routes.upvote_comment(c).endpoint,
         routes.upvote_comment(c).body);
   }
-  downvoteComment(c: comment_vote_context): Observable<Status> {
+  downvoteComment(c: CommentVoteContext): Observable<Status> {
     return this.httpClient
     .authenticate()
       .post<Status>(

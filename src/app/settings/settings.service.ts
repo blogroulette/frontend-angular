@@ -8,7 +8,7 @@ const routes = {
   load_settings: () => {return ({
     endpoint: '/LoadSettings',
   }); },
-  save_settings: (c: save_settings_context) => {return ({
+  save_settings: (c: SaveSettingsContext) => {return ({
     endpoint: '/SaveSettings',
     body: {
       username: c.username,
@@ -18,7 +18,7 @@ const routes = {
   }); },
 };
 
-export interface save_settings_context {
+export interface SaveSettingsContext {
   username: string;
   password: string;
   newpassword: string;
@@ -35,7 +35,7 @@ export class SettingsService {
       .post<Settings>(
         routes.load_settings().endpoint, {});
   }
-  saveSettings(c: save_settings_context): Observable<Status> {
+  saveSettings(c: SaveSettingsContext): Observable<Status> {
     return this.httpClient
       .authenticate()
       .post<Status>(
