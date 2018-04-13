@@ -2,10 +2,10 @@ import { TestBed, inject, async } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { CoreModule, HttpCacheService } from '@app/core';
-import { RouletteService } from './roulette.service';
+import { RouletteService, Message } from './roulette.service';
 
 describe('RouletteService', () => {
-  const rouletteService: RouletteService;
+  let rouletteService: RouletteService;
   let httpMock: HttpTestingController;
 
   beforeEach(async(() => {
@@ -26,47 +26,54 @@ describe('RouletteService', () => {
     RouletteService,
     HttpTestingController
   ], (htttpCacheService: HttpCacheService,
-      _quoteService: RouletteService,
-      _httpMock: HttpTestingController) => {
+    _rouletteService: RouletteService,
+    _httpMock: HttpTestingController) => {
 
-    quoteService = _quoteService;
-    httpMock = _httpMock;
+      rouletteService = _rouletteService;
+      httpMock = _httpMock;
 
-    htttpCacheService.cleanCache();
-  }));
+      htttpCacheService.cleanCache();
+    }));
 
   afterEach(() => {
     httpMock.verify();
   });
 
   describe('getMessages', () => {
-    it('should return a random Messages', () => {
+    it('should return a random Message', () => {
       // Arrange
-      const mockRoulette = { value: 'Message' };
+      const mockRoulette: Message = {
+        messageid: 'asdf1234',
+        title: 'title',
+        text: 'text',
+        timestamp: '152000000',
+        votes: 12
+      };
 
       // Act
-      const randomRouletteSubscription = ouletteService.getRandomRoulette({ category: 'toto' });
+      const randomRouletteSubscription = rouletteService.getRandomMessage();
 
       // Assert
-      randomRouletteSubscription.subscribe((quote: string) => {
-        expect(quote).toEqual(mockRoulette.value);
+      randomRouletteSubscription.subscribe((message: Message) => {
+        expect(message.messageid).toEqual(mockRoulette.messageid);
       });
-      httpMock.expectOne({}).flush(mockQuote);
+      httpMock.expectOne({}).flush(mockRoulette);
     });
 
+    /*
     it('should return a string in case of error', () => {
       // Act
-      const randomRouletteSubscription = rouletteService.getRandomRoulette({ category: 'toto' });
+      const randomRouletteSubscription = rouletteService.getRandomMessage();
 
       // Assert
-      randomRouletteSubscription.subscribe((roulette: string) => {
-        expect(typeof roulette).toEqual('string');
-        expect(roulette).toContain('Error');
+      randomRouletteSubscription.subscribe((message: Message) => {
+        expect(typeof message).toEqual('Message');
+        expect(message).toContain('error');
       });
       httpMock.expectOne({}).flush(null, {
         status: 500,
         statusText: 'error'
       });
-    });
+    });*/
   });
 });

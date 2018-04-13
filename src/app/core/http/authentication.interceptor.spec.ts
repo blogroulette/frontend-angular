@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
 import { environment } from '@env/environment';
 import { AuthenticationInterceptor } from './authentication.interceptor';
+import { CoreModule } from '@app/core';
 
 describe('AuthenticationInterceptor', () => {
   let http: HttpClient;
@@ -11,7 +12,8 @@ describe('AuthenticationInterceptor', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule,
+        CoreModule],
       providers: [{
         provide: HTTP_INTERCEPTORS,
         useClass: AuthenticationInterceptor,
@@ -24,11 +26,11 @@ describe('AuthenticationInterceptor', () => {
     HttpClient,
     HttpTestingController
   ], (_http: HttpClient,
-      _httpMock: HttpTestingController) => {
+    _httpMock: HttpTestingController) => {
 
-    http = _http;
-    httpMock = _httpMock;
-  }));
+      http = _http;
+      httpMock = _httpMock;
+    }));
 
   afterEach(() => {
     httpMock.verify();
@@ -36,10 +38,10 @@ describe('AuthenticationInterceptor', () => {
 
   it('should add authentication header field to the request url', () => {
     // Act
-    http.get('/toto').authenticate().subscribe();
+    http.get('/AddComment').subscribe();
 
     // Assert
     // test for authenticatio header field
-    httpMock.expectOne({ url: environment.serverUrl + '/toto'});
+    httpMock.expectOne({ url: environment.serverUrl + '/AddComment' });
   });
 });

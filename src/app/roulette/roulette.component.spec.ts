@@ -5,21 +5,29 @@ import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { RouletteComponent } from './roulette.component';
 import { RouletteService } from './roulette.service';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { MarkdownModule } from 'ngx-markdown';
 
 describe('RouletteComponent', () => {
   let component: RouletteComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+  let fixture: ComponentFixture<RouletteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-        imports: [
-          CoreModule,
-          SharedModule,
-          HttpClientTestingModule
-        ],
-        declarations: [RouletteComponent],
-        providers: [RouletteService]
-      })
+      imports: [
+        CommonModule,
+        TranslateModule,
+        ReactiveFormsModule,
+        MarkdownModule.forChild(),
+        CoreModule,
+        SharedModule,
+        HttpClientTestingModule
+      ],
+      declarations: [RouletteComponent],
+      providers: [RouletteService]
+    })
       .compileComponents();
   }));
 

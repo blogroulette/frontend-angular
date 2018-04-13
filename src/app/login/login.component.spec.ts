@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CoreModule } from '@app/core';
 import { LoginComponent } from './login.component';
+import { SharedModule } from '@app/shared';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -18,11 +19,12 @@ describe('LoginComponent', () => {
         RouterTestingModule,
         TranslateModule.forRoot(),
         ReactiveFormsModule,
+        SharedModule,
         CoreModule
       ],
       declarations: [LoginComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

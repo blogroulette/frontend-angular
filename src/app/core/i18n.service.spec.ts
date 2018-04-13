@@ -46,19 +46,19 @@ describe('I18nService', () => {
     I18nService,
     TranslateService
   ], (_i18nService: I18nService,
-      _translateService: TranslateService) => {
+    _translateService: TranslateService) => {
 
-    i18nService = _i18nService;
-    translateService = _translateService;
+      i18nService = _i18nService;
+      translateService = _translateService;
 
-    // Create spies
-    onLangChangeSpy = jasmine.createSpy('onLangChangeSpy');
-    translateService.onLangChange
-      .subscribe((event: LangChangeEvent) => {
-        onLangChangeSpy(event.lang);
-      });
-    spyOn(translateService, 'use').and.callThrough();
-  }));
+      // Create spies
+      onLangChangeSpy = jasmine.createSpy('onLangChangeSpy');
+      translateService.onLangChange
+        .subscribe((event: LangChangeEvent) => {
+          onLangChangeSpy(event.lang);
+        });
+      spyOn(translateService, 'use').and.callThrough();
+    }));
 
   afterEach(() => {
     // Cleanup
@@ -111,15 +111,15 @@ describe('I18nService', () => {
 
     it('should change current language without a region match', () => {
       // Arrange
-      const newLanguage = 'fr-CA';
+      const newLanguage = 'de-AT';
       i18nService.init(defaultLanguage, supportedLanguages);
 
       // Act
       i18nService.language = newLanguage;
 
       // Assert
-      expect(translateService.use).toHaveBeenCalledWith('fr-FR');
-      expect(onLangChangeSpy).toHaveBeenCalledWith('fr-FR');
+      expect(translateService.use).toHaveBeenCalledWith('de-DE');
+      expect(onLangChangeSpy).toHaveBeenCalledWith('de-DE');
     });
 
     it('should change current language to default if unsupported', () => {
