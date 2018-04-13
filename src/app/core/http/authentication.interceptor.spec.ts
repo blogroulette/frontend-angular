@@ -45,6 +45,7 @@ describe('AuthenticationInterceptor', () => {
     // Assert
     // test for authenticatio header field
     const httpRequest = httpMock.expectOne({ url: '/api/AddComment' });
-    expect(httpRequest.request.headers['Authorization']).toBe('Bearer 123456');
+    console.log(httpRequest.request.headers.get('Authorization'));
+    expect(httpRequest.request.headers.get('Authorization')).toBe('Bearer 123456');
   });
 });

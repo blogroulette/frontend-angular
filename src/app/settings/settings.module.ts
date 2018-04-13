@@ -12,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
-    TranslateModule,
+    TranslateModule.forChild(),
     ReactiveFormsModule,
     CoreModule,
     SharedModule,

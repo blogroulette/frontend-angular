@@ -6,8 +6,8 @@ import { Credentials, LoginContext } from './authentication.service';
 export class MockAuthenticationService {
 
   credentials: Credentials | null = {
-    username: 'test',
-    token: '123'
+    username: 'Mustermann',
+    token: '123456'
   };
 
   login(context: LoginContext): Observable<Credentials> {

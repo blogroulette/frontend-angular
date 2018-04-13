@@ -13,7 +13,7 @@ import { RouletteService } from './roulette.service';
 @NgModule({
   imports: [
     CommonModule,
-    TranslateModule,
+    TranslateModule.forChild(),
     ReactiveFormsModule,
     MarkdownModule.forChild(),
     CoreModule,
