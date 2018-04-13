@@ -4,7 +4,7 @@ import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
 import { environment } from '@env/environment';
 import { AuthenticationInterceptor } from './authentication.interceptor';
-import { CoreModule } from '@app/core';
+import { CoreModule, AuthenticationService, MockAuthenticationService } from '@app/core';
 
 describe('AuthenticationInterceptor', () => {
   let http: HttpClient;
@@ -18,7 +18,9 @@ describe('AuthenticationInterceptor', () => {
         provide: HTTP_INTERCEPTORS,
         useClass: AuthenticationInterceptor,
         multi: true
-      }]
+      },
+      { provide: AuthenticationService, useClass: MockAuthenticationService }
+      ]
     });
   });
 
@@ -42,6 +44,7 @@ describe('AuthenticationInterceptor', () => {
 
     // Assert
     // test for authenticatio header field
-    httpMock.expectOne({ url: environment.serverUrl + '/AddComment' });
+    const httpRequest = httpMock.expectOne({ url: '/api/AddComment' });
+    expect(httpRequest.request.headers['Authorization']).toBe('Bearer 123456');
   });
 });

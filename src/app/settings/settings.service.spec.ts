@@ -1,8 +1,10 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
-import { CoreModule, HttpCacheService } from '@app/core';
+import { CoreModule, HttpCacheService, MockAuthenticationService, AuthenticationService } from '@app/core';
 import { SettingsService, Settings } from './settings.service';
+import { AuthenticationInterceptor } from '@app/core/http/authentication.interceptor';
 
 describe('SettingsService', () => {
   let settingsService: SettingsService;
@@ -15,7 +17,13 @@ describe('SettingsService', () => {
         HttpClientTestingModule
       ],
       providers: [
-        SettingsService
+        SettingsService,
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: AuthenticationInterceptor,
+          multi: true
+        },
+        { provide: AuthenticationService, useClass: MockAuthenticationService }
       ]
     });
   }));

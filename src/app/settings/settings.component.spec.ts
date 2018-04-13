@@ -1,14 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { CoreModule } from '@app/core';
+import { CoreModule, AuthenticationService, MockAuthenticationService } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { SettingsComponent } from './settings.component';
 import { SettingsService } from './settings.service';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MarkdownModule } from 'ngx-markdown';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
@@ -18,15 +16,16 @@ describe('SettingsComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         CommonModule,
-        TranslateModule,
+        TranslateModule.forRoot(),
         ReactiveFormsModule,
-        MarkdownModule.forChild(),
         CoreModule,
         SharedModule,
-        HttpClientTestingModule
       ],
       declarations: [SettingsComponent],
-      providers: [SettingsService]
+      providers: [
+        SettingsService,
+        { provide: AuthenticationService, useClass: MockAuthenticationService }
+      ]
     })
       .compileComponents();
   }));
