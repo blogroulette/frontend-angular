@@ -10,8 +10,7 @@ export class LoaderComponent implements OnInit {
   @Input() isLoading = false;
   @Input() message: string;
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() { }
 
