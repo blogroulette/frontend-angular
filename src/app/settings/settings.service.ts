@@ -5,17 +5,21 @@ import { of } from 'rxjs/observable/of';
 import { map, catchError } from 'rxjs/operators';
 
 const routes = {
-  load_settings: () => {return ({
-    endpoint: '/LoadSettings',
-  }); },
-  save_settings: (c: SaveSettingsContext) => {return ({
-    endpoint: '/SaveSettings',
-    body: {
-      username: c.username,
-      password: c.password,
-      newpassword: c.newpassword,
-    },
-  }); },
+  load_settings: () => {
+    return ({
+      endpoint: '/settings',
+    });
+  },
+  save_settings: (c: SaveSettingsContext) => {
+    return ({
+      endpoint: '/settings',
+      body: {
+        username: c.username,
+        password: c.password,
+        newpassword: c.newpassword,
+      },
+    });
+  },
 };
 
 export interface SaveSettingsContext {
@@ -32,13 +36,13 @@ export class SettingsService {
   loadSettings(): Observable<Settings> {
     return this.httpClient
       .authenticate()
-      .post<Settings>(
+      .get<Settings>(
         routes.load_settings().endpoint, {});
   }
   saveSettings(c: SaveSettingsContext): Observable<Status> {
     return this.httpClient
       .authenticate()
-      .post<Status>(
+      .put<Status>(
         routes.save_settings(c).endpoint,
         routes.save_settings(c).body);
   }
