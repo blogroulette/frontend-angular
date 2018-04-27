@@ -112,7 +112,7 @@
       error?: string,
     }
 
-#### add Message:Authenticated
+#### add Entry:Authenticated
 
     ENDPOINT: entry
     HEADER{
@@ -128,7 +128,7 @@
       error?: string,
     }
 
-#### vote Message:Authenticated
+#### vote Entry:Authenticated
 
     ENDPOINT: entry/<entryid>/vote
     HEADER{
