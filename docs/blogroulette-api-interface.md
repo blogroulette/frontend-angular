@@ -4,70 +4,96 @@
 
 #### Login
 
-    ENDPOINT: Login
+    ENDPOINT: session
     POST{
       username: string,
       password: string,
     }
-    RESPONSE{
+    RESPONSE:200{
       username: string,
       token: string,
+    }
+    ERROR RESPONSE:400|5xx{
+      status: string,
+      error?: string,
     }
 
 #### Logout:Authenticated
 
-    ENDPOINT: Logout
-    POST{}
-    RESPONSE{
+    ENDPOINT: session
+    HEADER{
+      Authentication: Bearer <JWT>
+    }
+    DELETE{}
+    RESPONSE:204{}
+    ERROR RESPONSE:400|5xx{
       status: string,
       error?: string,
     }
 
 #### Register
 
-    ENDPOINT: Register
+    ENDPOINT: user
     POST{
       username: string,
       password: string,
     }
-    RESPONSE{
+    RESPONSE:200{
       username: string,
       token: string,
+    }
+    ERROR RESPONSE:400|422|5xx{
+      status: string,
+      error?: string,
     }
 
 ### All Authenticated Requests use a JWT in the Authentication-Header-Field as a Bearer Token.
 
 ## Settings
 
-#### LoadSettings:Authenticated
+#### Load Settings:Authenticated
 
-    ENDPOINT: LoadSettings
-    POST{}
-    RESPONSE{
+    ENDPOINT: settings
+    HEADER{
+      Authentication: Bearer <JWT>
+    }
+    GET{}
+    RESPONSE:200{
       username: string,
     }
+    ERROR RESPONSE:400|401|403|5xx{
+      status: string,
+      error?: string,
+    }
 
-#### SaveSettings:Authenticated
+#### Save Settings:Authenticated
 
-    ENDPOINT: SaveSettings
-    POST{
+    ENDPOINT: settings
+    HEADER{
+      Authentication: Bearer <JWT>
+    }
+    PUT{
       username: string,
       password: string,
       newpassword: string,
     }
-    RESPONSE{
+    RESPONSE:204{}
+    ERROR RESPONSE:400|401|403|5xx{
       status: string,
       error?: string,
     }
 
 ## Roulette
 
-#### getMessage
+#### get Entry
 
-    ENDPOINT: GetRandomMessage
-    POST{messageid?: string}
-    RESPONSE{
-      messageid: string,
+    ENDPOINT: entry/<entryid>
+    HEADER{
+      Authentication: Bearer <JWT>
+    }
+    GET{}
+    RESPONSE:200{
+      entryid: string,
       timestamp: RFC3339(2004-06-14T23:34:30Z),
       title: string,
       text: string,
@@ -81,52 +107,68 @@
         }
       ]
     }
+    ERROR RESPONSE:400|401|404|5xx{
+      status: string,
+      error?: string,
+    }
 
-#### addMessage:Authenticated
+#### add Message:Authenticated
 
-    ENDPOINT: AddMessage
+    ENDPOINT: entry
+    HEADER{
+      Authentication: Bearer <JWT>
+    }
     POST{
       title: string,
       text: string,
     }
-    RESPONSE{
+    RESPONSE:204{}
+    ERROR RESPONSE:400|401|422|5xx{
       status: string,
       error?: string,
     }
 
-#### voteMessage:Authenticated
+#### vote Message:Authenticated
 
-    ENDPOINT: VoteMessage
-    POST{
-      messageid: string,
+    ENDPOINT: entry/<entryid>/vote
+    HEADER{
+      Authentication: Bearer <JWT>
+    }
+    PUT{
       vote: up|down
     }
-    RESPONSE{
+    RESPONSE:204{}
+    ERROR RESPONSE:400|401|404|5xx{
       status: string,
       error?: string,
     }
 
-#### addComment:Authenticated
+#### add Comment:Authenticated
 
-    ENDPOINT: AddComment
+    ENDPOINT: entry/<entryid>/comment
+    HEADER{
+      Authentication: Bearer <JWT>
+    }
     POST{
-      messageid: string,
       text: string,
     }
-    RESPONSE{
+    RESPONSE:204{}
+    ERROR RESPONSE:400|401|422|5xx{
       status: string,
       error?: string,
     }
 
-#### voteComment:Authenticated
+#### vote Comment:Authenticated
 
-    ENDPOINT: VoteComment
-    POST{
-      commentid: string;
-      messageid: string,
+    ENDPOINT: entry/<entryid>/comment/<commentid>/vote
+    HEADER{
+      Authentication: Bearer <JWT>
+    }
+    PUT{
       vote: up|down
     }
-    RESPONSE{
+    RESPONSE:204{}
+    ERROR RESPONSE:400|401|404|5xx{
       status: string,
       error?: string,
     }
