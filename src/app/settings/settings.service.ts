@@ -7,12 +7,12 @@ import { map, catchError } from 'rxjs/operators';
 const routes = {
   load_settings: () => {
     return ({
-      endpoint: '/settings',
+      endpoint: '/LoadSettings',
     });
   },
   save_settings: (c: SaveSettingsContext) => {
     return ({
-      endpoint: '/settings',
+      endpoint: '/SaveSettings',
       body: {
         username: c.username,
         password: c.password,
