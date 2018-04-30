@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
-import { Logger, I18nService, AuthenticationService } from '@app/core';
+import { Logger, I18nService, AuthenticationService, Credentials, Response } from '@app/core';
 import { PasswordTestService, Check } from '@app/shared';
 import { of } from 'rxjs/observable/of';
 
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   version: string = environment.version;
   error: string;
+  message: string;
   loginForm: FormGroup;
   registerForm: FormGroup;
   isLoading = false;
@@ -26,10 +27,10 @@ export class LoginComponent implements OnInit {
   check: Check;
 
   constructor(private router: Router,
-              private formBuilder: FormBuilder,
-              private i18nService: I18nService,
-              private passwordTestService: PasswordTestService,
-              private authenticationService: AuthenticationService) {
+    private formBuilder: FormBuilder,
+    private i18nService: I18nService,
+    private passwordTestService: PasswordTestService,
+    private authenticationService: AuthenticationService) {
     this.createForm();
   }
 
@@ -37,40 +38,38 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.isLoading = true;
-    this.authenticationService.login(this.loginForm.value)
+    this.authenticationService.login({
+      username: this.loginForm.value.username,
+      password: this.loginForm.value.password
+    })
       .pipe(finalize(() => {
         this.loginForm.markAsPristine();
         this.isLoading = false;
       }))
-      .subscribe(credentials => {
-        log.debug(`${credentials.username} successfully logged in`);
+      .subscribe((response: Response) => {
+        this.message = response.status;
         this.router.navigate(['/'], { replaceUrl: true });
-      }, (error: string) => {
-        log.debug(`Login error: ${error}`);
-        this.error = error;
-      });
+      }, (error) => { this.error = this.message; });
   }
 
   register() {
     this.isLoading = true;
-    this.authenticationService.register( {
+    this.authenticationService.register({
       username: this.registerForm.value.username,
       password: this.registerForm.value.password
-    } )
+    })
       .pipe(finalize(() => {
         this.registerForm.markAsPristine();
         this.isLoading = false;
       }))
-      .subscribe(credentials => {
-        log.debug(`${credentials.username} successfully logged in`);
+      .subscribe((response: Response) => {
+        this.message = response.status;
         this.router.navigate(['/'], { replaceUrl: true });
-      }, (error: string) => {
-        log.debug(`Login error: ${error}`);
-        this.error = error;
-      });
+      }, (error) => { this.error = this.message; });
   }
+
   passwordtest() {
-      this.check = this.passwordTestService.TestPassword(this.registerForm.value.password);
+    this.check = this.passwordTestService.TestPassword(this.registerForm.value.password);
   }
 
   setLanguage(language: string) {
@@ -94,11 +93,8 @@ export class LoginComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      rpassword: ['', Validators.required, this.passwordsmatch]
+      rpassword: ['', Validators.required]
     });
   }
-  passwordsmatch(cg: FormGroup) {
-      return of (cg.value.password === cg.value.rpassword ? null : cg.value.password);
-}
 
 }

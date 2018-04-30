@@ -47,5 +47,6 @@
   "The password must contain at least one uppercase letter.": "Das Passwort sollte mindestens einen Großbuchstaben enthalten.",
   "The password must contain at least one number.": "Das Passwort sollte mindestens eine Ziffer enthalten.",
   "The password must contain at least one special character.": "Das Passwort sollte mindestens ein Sonderzeichen enthalten.",
-  "The password must contain at least one lowercase letter.": "Das Passwort sollte mindestens einen Kleinbuchstaben enthalten."
-  }
+  "The password must contain at least one lowercase letter.": "Das Passwort sollte mindestens einen Kleinbuchstaben enthalten.",
+  "The password may not contain sequences of three or more repeated characters.": "Das Passwort sollte keine drei oder mehr Wiederhlungen beinhalten."
+}

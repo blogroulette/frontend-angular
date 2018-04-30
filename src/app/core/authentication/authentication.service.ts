@@ -9,6 +9,13 @@ export interface Credentials {
   token: string;
 }
 
+export interface Response {
+  username?: string;
+  token?: string;
+  status?: string;
+  error?: string;
+}
+
 export interface LoginContext {
   username: string;
   password: string;
@@ -25,23 +32,29 @@ export interface Status {
 }
 
 const routes = {
-  login: (c: LoginContext) => {return ({
-    endpoint: '/Login',
-    body: {
-      username: c.username,
-      password: c.password,
-    },
-  }); },
-  register: (c: RegisterContext) => {return ({
-    endpoint: '/Register',
-    body: {
-      username: c.username,
-      password: c.password,
-    },
-  }); },
-  logout: () => {return ({
-    endpoint: '/Logout',
-  }); },
+  login: (c: LoginContext) => {
+    return ({
+      endpoint: '/Login',
+      body: {
+        username: c.username,
+        password: c.password,
+      },
+    });
+  },
+  register: (c: RegisterContext) => {
+    return ({
+      endpoint: '/Register',
+      body: {
+        username: c.username,
+        password: c.password,
+      },
+    });
+  },
+  logout: () => {
+    return ({
+      endpoint: '/Logout',
+    });
+  },
 };
 
 const credentialsKey = 'credentials';
@@ -65,47 +78,48 @@ export class AuthenticationService {
   /**
    * Authenticates the user.
    * @param {LoginContext} context The login parameters.
-   * @return {Observable<Credentials>} The user credentials.
+   * @return {Observable<Response>} The user credentials.
    */
-  login(c: LoginContext): Observable<Credentials> {
+  login(c: LoginContext): Observable<Response> {
     const obs = this.httpClient
-      .post<Credentials>(
+      .post<Response>(
         routes.login(c).endpoint,
         routes.login(c).body);
     obs.subscribe((credentials: Credentials) => {
-        this.setCredentials(credentials, c.remember);
-        });
+      this.setCredentials(credentials, c.remember);
+    });
     return obs;
   }
 
   /**
    * Registers the user.
    * @param {RegisterContext} context The register parameters.
-   * @return {Observable<Credentials>} The user credentials.
+   * @return {Observable<Response>} The user credentials.
    */
-  register(c: RegisterContext): Observable<Credentials> {
+  register(c: RegisterContext): Observable<Response> {
     const obs = this.httpClient
-      .post<Credentials>(
+      .post<Response>(
         routes.register(c).endpoint,
         routes.register(c).body);
     obs.subscribe((credentials: Credentials) => {
-        this.setCredentials(credentials);
-        });
+      this.setCredentials(credentials, false);
+    });
     return obs;
   }
 
   /**
    * Logs out the user and clear credentials.
-   * @return {Observable<boolean>} True if the user was logged out successfully.
+   * @return {Observable<Status>} True if the user was logged out successfully.
    */
   logout(): Observable<Status> {
     const obs = this.httpClient
       .authenticate()
       .post<Status>(
         routes.logout().endpoint, {});
-    this.setCredentials();
-    const st = {status: 'logoff'};
-    return of(st);
+    obs.subscribe(() => {
+      this.setCredentials();
+    });
+    return obs;
   }
 
   /**
