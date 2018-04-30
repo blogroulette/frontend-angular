@@ -36,13 +36,13 @@ export class SettingsService {
   loadSettings(): Observable<Settings> {
     return this.httpClient
       .authenticate()
-      .get<Settings>(
+      .post<Settings>(
         routes.load_settings().endpoint, {});
   }
   saveSettings(c: SaveSettingsContext): Observable<Status> {
     return this.httpClient
       .authenticate()
-      .put<Status>(
+      .post<Status>(
         routes.save_settings(c).endpoint,
         routes.save_settings(c).body);
   }
