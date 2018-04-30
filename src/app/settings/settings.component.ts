@@ -38,15 +38,15 @@ export class SettingsComponent implements OnInit {
       .subscribe((status: Status) => { this.status = status; });
   }
   passwordtest() {
-      this.check = this.passwordTest.TestPassword(this.savesettingsForm.value.password);
+    this.check = this.passwordTest.TestPassword(this.savesettingsForm.value.password);
   }
   private createForm() {
     this.savesettingsForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      new_password: ['', Validators.required],
-      rnew_password: ['', Validators.required]
+      newpassword: ['', Validators.required],
+      rnewpassword: ['', Validators.required]
     });
-    }
+  }
 
 }

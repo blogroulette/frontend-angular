@@ -91,6 +91,10 @@ export class AuthenticationService {
     return obs;
   }
 
+  Syslogin(credentials: Credentials) {
+    this.setCredentials(credentials);
+  }
+
   /**
    * Registers the user.
    * @param {RegisterContext} context The register parameters.
@@ -102,7 +106,7 @@ export class AuthenticationService {
         routes.register(c).endpoint,
         routes.register(c).body);
     obs.subscribe((credentials: Credentials) => {
-      this.setCredentials(credentials, false);
+      this.setCredentials(credentials);
     });
     return obs;
   }

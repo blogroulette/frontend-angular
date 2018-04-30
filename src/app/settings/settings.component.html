@@ -2,9 +2,8 @@
   <div class="card spacing-all">
     <h2 translate>Settings</h2>
     <form class="container marg-0 padd-0" (ngSubmit)="saveSettings()" [formGroup]="savesettingsForm" novalidate>
-      <div *ngIf="status && status.status != 'ok'" class="alert alert-danger spacing-m-top" role="alert" (click)="status = null;"
-            translate>
-            <b>{{status.status | translate}}</b><small *ngIf="status.error"> {{status.error | translate}}</small>
+      <div *ngIf="status && status.status != 'ok'" class="alert alert-danger spacing-m-top" role="alert" (click)="status = null;" translate>
+        <b>{{status.status | translate}}</b><small *ngIf="status.error"> {{status.error | translate}}</small>
       </div>
       <label class="d-block">
           <input type="text" class="form-control " formControlName="username" autocomplete="username"
@@ -14,42 +13,42 @@
           </div>
       </label>
       <label class="d-block">
-          <input type="text" class="form-control " formControlName="password" autocomplete="Password"
+          <input type="password" class="form-control " formControlName="password" autocomplete="Password"
               [placeholder]="'Current Password' | translate"/>
           <div class="alert alert-danger spacing-m-top spacing-top-small" role="alert" [hidden]="savesettingsForm.controls.password.valid || savesettingsForm.controls.password.untouched">
               <small translate>Enter your password.</small>
           </div>
       </label>
       <label class="d-block">
-          <input type="text" class="form-control " formControlName="new_password" autocomplete="New Password" (change)="passwordtest();"
+          <input type="password" class="form-control " formControlName="newpassword" autocomplete="New Password" (change)="passwordtest();"
               [placeholder]="'New Password' | translate"/>
-          <div class="alert alert-danger spacing-m-top spacing-top-small" role="alert" [hidden]="savesettingsForm.controls.new_password.valid || savesettingsForm.controls.new_password.untouched">
+          <div class="alert alert-danger spacing-m-top spacing-top-small" role="alert" [hidden]="savesettingsForm.controls.newpassword.valid || savesettingsForm.controls.newpassword.untouched">
               <small translate>Enter New password.</small>
+          </div>
+      </label>
+      <label class="d-block">
+          <input type="password" class="form-control " formControlName="rnewpassword" autocomplete="Repeat New Password"
+              [placeholder]="'Repeat New Password' | translate"/>
+          <div class="alert alert-danger spacing-m-top spacing-top-small" role="alert" [hidden]="savesettingsForm.controls.rnewpassword.valid || savesettingsForm.controls.rnewpassword.untouched"
+              ><small translate>Passwords do not match.</small>
           </div>
       </label>
       <div *ngIf="check">
         <div *ngFor="let error of check.errors" class="alert alert-danger marg-bottom-0 spacing-top-small" role="alert">
-            <small>{{error | translate}}</small>
+          <small>{{error | translate}}</small>
         </div>
         <div *ngIf="!check.strong" class="alert alert-danger spacing-top-small" role="alert">
-            <b translate>Weak</b>
+          <b translate>Weak</b>
         </div>
         <div *ngIf="check.strong" class="alert alert-success spacing-top-small" role="alert">
-            <b translate>Strong</b>
+          <b translate>Strong</b>
         </div>
       </div>
-      <label class="d-block">
-          <input type="text" class="form-control " formControlName="rnew_password" autocomplete="Repeat New Password"
-              [placeholder]="'Repeat New Password' | translate"/>
-          <div class="alert alert-danger spacing-m-top spacing-top-small" role="alert" [hidden]="savesettingsForm.controls.rnew_password.valid || savesettingsForm.controls.rnew_password.untouched"
-              ><small translate>Passwords do not match.</small>
-          </div>
-      </label>
       <div *ngIf="this.status" class="alert alert-danger spacing-m-top" role="alert">
-              <b>{{status.satus}}</b><small translate>{{status.error}}</small>
+        <b>{{status.satus}}</b><small translate>{{status.error}}</small>
       </div>
       <div class="clearfix spacing-top">
-          <button type="submit" name="button" class="btn btn-success spacing-top float-right" translate>Submit</button>
+        <button type="submit" name="button" class="btn btn-success spacing-top float-right" translate>Submit</button>
       </div>
     </form>
   </div>

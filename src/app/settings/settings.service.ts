@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map, catchError } from 'rxjs/operators';
+import { AuthenticationService, Credentials } from '@app/core';
 
 const routes = {
   load_settings: () => {
@@ -31,7 +32,7 @@ export interface SaveSettingsContext {
 @Injectable()
 export class SettingsService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private authenticationService: AuthenticationService) { }
 
   loadSettings(): Observable<Settings> {
     return this.httpClient
@@ -40,11 +41,15 @@ export class SettingsService {
         routes.load_settings().endpoint, {});
   }
   saveSettings(c: SaveSettingsContext): Observable<Status> {
-    return this.httpClient
+    const obs = this.httpClient
       .authenticate()
       .post<Status>(
         routes.save_settings(c).endpoint,
         routes.save_settings(c).body);
+    obs.subscribe((credentials: Credentials) => {
+      this.authenticationService.Syslogin(credentials);
+    });
+    return obs;
   }
 
 }
@@ -52,6 +57,8 @@ export class SettingsService {
 export interface Status {
   status: string;
   error?: string;
+  username: string;
+  token: string;
 }
 export interface Settings {
   username: string;
