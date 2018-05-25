@@ -62,9 +62,9 @@
 
 ## Roulette
 
-#### getMessage
+#### GetMessage
 
-    ENDPOINT: GetRandomMessage
+    ENDPOINT: GetMessage
     POST{messageid?: string}
     RESPONSE{
       messageid: string,
