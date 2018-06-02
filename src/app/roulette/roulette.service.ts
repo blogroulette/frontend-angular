@@ -10,16 +10,16 @@ const routes = {
       endpoint: '/GetMessage',
     });
   },
-  get_documentation: () => {    
-return ({
+  get_documentation: () => {
+    return ({
       endpoint: '/GetMessage',
       body: {
         messageid: 0,
       }
     });
   },
-  add_message: (c: AddMessageContext) => {    
-return ({
+  add_message: (c: AddMessageContext) => {
+    return ({
       endpoint: '/AddMessage',
       body: {
         title: c.title,

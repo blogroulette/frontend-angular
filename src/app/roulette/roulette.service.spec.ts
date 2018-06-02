@@ -1,8 +1,15 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import { CoreModule, HttpCacheService } from '@app/core';
+import {
+  CoreModule,
+  HttpCacheService,
+  AuthenticationInterceptor,
+  AuthenticationService,
+  MockAuthenticationService
+} from '@app/core';
 import { RouletteService, Message } from './roulette.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 describe('RouletteService', () => {
   let rouletteService: RouletteService;
@@ -16,7 +23,13 @@ describe('RouletteService', () => {
       ],
       providers: [
         HttpCacheService,
-        RouletteService
+        RouletteService,
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: AuthenticationInterceptor,
+          multi: true
+        },
+        { provide: AuthenticationService, useClass: MockAuthenticationService }
       ]
     });
   }));

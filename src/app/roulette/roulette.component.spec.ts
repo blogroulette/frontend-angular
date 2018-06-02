@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { CoreModule } from '@app/core';
+import { CoreModule, MockAuthenticationService, AuthenticationService } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { RouletteComponent } from './roulette.component';
 import { RouletteService } from './roulette.service';
@@ -24,7 +24,8 @@ describe('RouletteComponent', () => {
         HttpClientTestingModule
       ],
       declarations: [RouletteComponent],
-      providers: [RouletteService]
+      providers: [RouletteService,
+        { provide: AuthenticationService, useClass: MockAuthenticationService }]
     })
       .compileComponents();
   }));

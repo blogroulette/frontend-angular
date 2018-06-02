@@ -73,7 +73,7 @@ export class RouletteComponent implements OnInit {
   upvoteComment(comment: Comment) {
     this.rouletteService.upvoteComment({ commentid: comment.commentid, messageid: this.message.messageid })
       .subscribe((status: Status) => {
-        if (status.status != "ok") {
+        if (status.status !== 'ok') {
           this.status = status;
         }
         comment.votes = comment.votes * 1 + 1;
@@ -82,7 +82,7 @@ export class RouletteComponent implements OnInit {
   downvoteComment(comment: Comment) {
     this.rouletteService.downvoteComment({ commentid: comment.commentid, messageid: this.message.messageid })
       .subscribe((status: Status) => {
-        if (status.status != "ok") {
+        if (status.status !== 'ok') {
           this.status = status;
         }
         comment.votes = comment.votes * 1 - 1;
@@ -91,7 +91,7 @@ export class RouletteComponent implements OnInit {
   upvoteMessage() {
     this.rouletteService.upvoteMessage({ messageid: this.message.messageid })
       .subscribe((status: Status) => {
-        if (status.status != "ok") {
+        if (status.status !== 'ok') {
           this.status = status;
         }
         this.message.votes = this.message.votes * 1 + 1;
@@ -100,7 +100,7 @@ export class RouletteComponent implements OnInit {
   downvoteMessage() {
     this.rouletteService.downvoteMessage({ messageid: this.message.messageid })
       .subscribe((status: Status) => {
-        if (status.status != "ok") {
+        if (status.status !== 'ok') {
           this.status = status;
         }
         this.message.votes = this.message.votes * 1 - 1;
