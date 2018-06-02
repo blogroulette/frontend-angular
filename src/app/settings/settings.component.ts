@@ -33,7 +33,7 @@ export class SettingsComponent implements OnInit {
   }
   saveSettings() {
     this.Settings_isLoading = true;
-    this.settingsService.saveSettings(this.savesettingsForm.value)
+    this.settingsService.saveSettings({ username: this.savesettingsForm.value.username, password: this.savesettingsForm.value.password, newpassword: this.savesettingsForm.value.newpassword })
       .pipe(finalize(() => { this.Settings_isLoading = false; }))
       .subscribe((status: Status) => { this.status = status; });
   }

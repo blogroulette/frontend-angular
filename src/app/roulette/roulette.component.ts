@@ -28,9 +28,12 @@ export class RouletteComponent implements OnInit {
     this.isLoading = false;
   }
 
+
+
   ngOnInit() {
     this.getMessage();
   }
+
   getMessage() {
     this.isLoading = true;
     this.rouletteService.getRandomMessage()
@@ -58,7 +61,7 @@ export class RouletteComponent implements OnInit {
   addMessage() {
     if (this.newmessageForm.invalid) { this.status = { status: 'error', error: 'Invalid message format.' }; return; }
     this.isLoading = true;
-    this.rouletteService.addMessage({ title: this.newmessageForm.value.title, text: this.newmessageForm.value.title })
+    this.rouletteService.addMessage({ title: this.newmessageForm.value.title, text: this.newmessageForm.value.text })
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((status: Status) => {
         this.status = status;
@@ -70,28 +73,36 @@ export class RouletteComponent implements OnInit {
   upvoteComment(comment: Comment) {
     this.rouletteService.upvoteComment({ commentid: comment.commentid, messageid: this.message.messageid })
       .subscribe((status: Status) => {
-        this.status = status;
+        if (status.status != "ok") {
+          this.status = status;
+        }
         comment.votes = comment.votes * 1 + 1;
       });
   }
   downvoteComment(comment: Comment) {
     this.rouletteService.downvoteComment({ commentid: comment.commentid, messageid: this.message.messageid })
       .subscribe((status: Status) => {
-        this.status = status;
+        if (status.status != "ok") {
+          this.status = status;
+        }
         comment.votes = comment.votes * 1 - 1;
       });
   }
   upvoteMessage() {
     this.rouletteService.upvoteMessage({ messageid: this.message.messageid })
       .subscribe((status: Status) => {
-        this.status = status;
+        if (status.status != "ok") {
+          this.status = status;
+        }
         this.message.votes = this.message.votes * 1 + 1;
       });
   }
   downvoteMessage() {
     this.rouletteService.downvoteMessage({ messageid: this.message.messageid })
       .subscribe((status: Status) => {
-        this.status = status;
+        if (status.status != "ok") {
+          this.status = status;
+        }
         this.message.votes = this.message.votes * 1 - 1;
       });
   }

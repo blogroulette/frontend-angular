@@ -1,13 +1,13 @@
 <div class="container">
   <div class="card spacing-all">
     <h2 translate>Settings</h2>
-    <form class="container marg-0 padd-0" (ngSubmit)="saveSettings()" [formGroup]="savesettingsForm" novalidate>
+    <form *ngIf="settings" class="container marg-0 padd-0" (ngSubmit)="saveSettings()" [formGroup]="savesettingsForm" novalidate>
       <div *ngIf="status && status.status != 'ok'" class="alert alert-danger spacing-m-top" role="alert" (click)="status = null;" translate>
         <b>{{status.status | translate}}</b><small *ngIf="status.error"> {{status.error | translate}}</small>
       </div>
       <label class="d-block">
           <input type="text" class="form-control " formControlName="username" autocomplete="username"
-              [placeholder]="'Username' | translate"/>
+              [placeholder]="Username | translate" value="{{settings.username}}"/>
           <div class="alert alert-danger spacing-m-top spacing-top-small" role="alert" [hidden]="savesettingsForm.controls.username.valid || savesettingsForm.controls.username.untouched">
           <small translate>Not Available.</small>
           </div>
@@ -48,7 +48,7 @@
         <b>{{status.satus}}</b><small translate>{{status.error}}</small>
       </div>
       <div class="clearfix spacing-top">
-        <button type="submit" name="button" class="btn btn-success spacing-top float-right" translate>Submit</button>
+        <button type="submit" name="button" class="btn btn-success spacing-top float-right" disabled="savesettingsForm.invalid" translate>Submit</button>
       </div>
     </form>
   </div>

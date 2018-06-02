@@ -122,7 +122,7 @@ export class AuthenticationService {
         routes.logout().endpoint, {});
     obs.subscribe(() => {
       this.setCredentials();
-    });
+    }, () => { this.setCredentials(); });
     return obs;
   }
 

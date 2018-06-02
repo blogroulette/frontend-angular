@@ -14,7 +14,7 @@
     <div *ngIf="message" class="card spacing-m-top">
       <div class="spacing-m-all">
         <h2>{{this.message.title}}</h2>
-        <markdown [data]="message.text"></markdown>
+        <markdown class="flex-column" *ngIf="message.text" [data]="message.text"></markdown>
         <div class="spacing-m-top spacing-m-bottom d-flex justify-content-between">
           <div>
             <span class="btn">{{message.votes}}</span>
@@ -34,11 +34,15 @@
       <form (ngSubmit)="addComment()" [formGroup]="addcommentForm" class="container-fluid marg-0 padd-0" novalidate>
         <div class="form-group">
           <label class="d-block">
-                <div>
-                  <p translate>Preview</p>
-                  <article><markdown [data]="addcommentForm.controls.text"></markdown></article>
-                  <p translate>Editor</p>
-                  <textarea class="form-control" formControlName="text" autocomplete="" aria-label="new Comment text area" rows="9"></textarea>
+                <div class="row v-marg-0">
+                  <article class="col-md-6 padd-vertical-25">
+                    <!--<p class="padd-horizontal" translate>Input</p>-->
+                    <textarea class="form-control" formControlName="text" autocomplete="" aria-label="new Comment text area" rows="6"></textarea>
+                  </article>
+                  <article class="col-md-6 padd-vertical-25">
+                    <!--<p class="padd-horizontal" translate>Markdown Preview</p>-->
+                    <markdown *ngIf="addcommentForm.value.text" [data]="addcommentForm.value.text">preview</markdown>
+                  </article>
                 </div>
                   <div class="alert alert-danger spacing-m-top" role="alert" [hidden]="addcommentForm.controls.text.valid || addcommentForm.controls.text.untouched">
                       <small translate>You need to add some text to add a comment.</small>
@@ -51,8 +55,8 @@
       </form>
     </div>
 
-    <div *ngIf="message">
-      <div *ngFor="let comment of message.comments" class="spacing-m-all d-flex justify-content-between">
+    <div *ngIf="message && message.comments">
+      <div *ngFor="let comment of message.comments" class="spacing-m-top d-flex justify-content-between padd-0">
         <div class="d-flex flex-column comment w-6">
           <span class="btn">{{comment.votes}}</span>
           <button type="button" class="btn header-button btn-primary" (click)="upvoteComment(comment);" [disabled]="!comment.commentid || isLoading" data-toggle="tooltip" data-placement="top" title="'Upvote Comment' | translate">
@@ -60,7 +64,9 @@
           <button type="button" class="btn header-button btn-primary" (click)="downvoteComment(comment);" [disabled]="!comment.commentid || isLoading" data-toggle="tooltip" data-placement="top" title="'Downvote Comment' | translate">
                 <i class="far fa-thumbs-down"></i></button>
         </div>
-        <markdown [data]="comment.text"></markdown>
+        <article class="container-fluid marg-0 padd-0">
+          <markdown class="spacing-m-all container-fluid" *ngIf="comment.text" [data]="comment.text"></markdown>
+        </article>
       </div>
     </div>
 
@@ -78,9 +84,15 @@
           </div>
           </label>
           <label class="d-block">
-            <div class="row">
-              <textarea class="col-md-6 form-control" formControlName="text" autocomplete="" aria-label="new message text area" rows="9"></textarea>
-              <article class="col-md-6"><markdown [data]="addcommentForm.controls.text"></markdown></article>
+            <div class="row v-marg-0">
+              <article class="col-md-6 padd-vertical-25">
+                <!--<p class="padd-horizontal" translate>Input</p>-->
+              <textarea class=" form-control" formControlName="text" autocomplete="" aria-label="new message text area" rows="6"></textarea>
+              </article>
+              <article class="col-md-6 padd-vertical-25">
+                <!--<p class="padd-horizontal" translate>Markdown Preview</p>-->
+              <markdown *ngIf="newmessageForm.value.text" [data]="newmessageForm.value.text"></markdown>
+              </article>
             </div>
           <div class="alert alert-danger spacing-m-top" role="alert" [hidden]="newmessageForm.controls.text.valid || newmessageForm.controls.text.untouched">
                 <small translate>You need to add some text to add a message.</small>
