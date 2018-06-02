@@ -10,9 +10,14 @@
     <img class="image-icon fa-spin fa-3x rounded-circle" src="assets/logo.png" alt="load other message" /></button>
   </div>
   <app-loader [isLoading]="isLoading"></app-loader>
+
   <div *ngIf="!write_new_message">
     <div *ngIf="message" class="card spacing-m-top">
       <div class="spacing-m-all">
+        <div class="row v-marg-0">
+          <small *ngIf="message.author">{{message.author}}</small>
+          <small *ngIf="message.timestamp">{{message.timestamp | date:'dd LLL yyyy HH:mm z'}}</small>
+        </div>
         <h2>{{this.message.title}}</h2>
         <markdown class="flex-column" *ngIf="message.text" [data]="message.text"></markdown>
         <div class="spacing-m-top spacing-m-bottom d-flex justify-content-between">
@@ -64,9 +69,15 @@
           <button type="button" class="btn header-button btn-primary" (click)="downvoteComment(comment);" [disabled]="!comment.commentid || isLoading" data-toggle="tooltip" data-placement="top" title="'Downvote Comment' | translate">
                 <i class="far fa-thumbs-down"></i></button>
         </div>
-        <article class="container-fluid marg-0 padd-0">
-          <markdown class="spacing-m-all container-fluid" *ngIf="comment.text" [data]="comment.text"></markdown>
-        </article>
+        <div class="container-fluid marg-0 padd-0">
+          <article class="card container-fluid marg-0 padd-0">
+            <markdown class="spacing-m-all container-fluid" *ngIf="comment.text" [data]="comment.text"></markdown>
+          </article>
+          <div class="row v-marg-0">
+            <small *ngIf="comment.author">{{comment.author}}</small>
+            <small *ngIf="comment.timestamp">{{comment.timestamp | date:'dd LLL yyyy HH:mm z'}}</small>
+          </div>
+        </div>
       </div>
     </div>
 
