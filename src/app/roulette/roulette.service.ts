@@ -167,7 +167,7 @@ export interface Status {
 
 export interface Message {
   messageid: string;
-  author: string;
+  author?: string;
   timestamp: string;
   title: string;
   text: string;
@@ -178,7 +178,7 @@ export interface Message {
 export interface Comment {
   commentid?: string;
   timestamp?: string;
-  author: string;
+  author?: string;
   text: string;
   votes: number;
 }
