@@ -48,7 +48,7 @@
         <b>{{status.satus}}</b><small translate>{{status.error}}</small>
       </div>
       <div class="clearfix spacing-top">
-        <button type="submit" name="button" class="btn btn-success spacing-top float-right" disabled="savesettingsForm.invalid" translate>Submit</button>
+        <button type="submit" name="button" class="btn btn-success spacing-top float-right" [disabled]="savesettingsForm.invalid && savesettingsForm.value.newpassword != savesettingsForm.value.rnewpassword" translate>Submit</button>
       </div>
     </form>
   </div>
