@@ -16,7 +16,7 @@
       <div class="spacing-m-all">
         <div class="row v-marg-0">
           <small *ngIf="message.author">{{message.author}}</small>
-          <small *ngIf="message.timestamp">{{message.timestamp | date:'dd LLL yyyy HH:mm z'}}</small>
+          <!--<small *ngIf="message.timestamp">{{message.timestamp | date:'dd LLL yyyy HH:mm z'}}</small>-->
         </div>
         <h2>{{this.message.title}}</h2>
         <markdown class="flex-column" *ngIf="message.text" [data]="message.text"></markdown>
@@ -75,7 +75,7 @@
           </article>
           <div class="row v-marg-0">
             <small *ngIf="comment.author">{{comment.author}}</small>
-            <small *ngIf="comment.timestamp">{{comment.timestamp | date:'dd LLL yyyy HH:mm z'}}</small>
+            <!--<small *ngIf="comment.timestamp">{{comment.timestamp | date:'dd LLL yyyy HH:mm z'}}</small>-->
           </div>
         </div>
       </div>
